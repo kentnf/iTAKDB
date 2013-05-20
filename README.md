@@ -170,35 +170,6 @@ mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/gen
 
 & generate images using MEGA software, upload images, clustering Trees to iTAK web &
 
-
-
-Plan 1 ..........................................one month.
-
-..............................................................................
-.....................ModelTest.............Model....ModelTest.2005....ModelTest3.7.........DOS.................................MrMTgui......ModelTest...........ModelTest.......PAUP..........Model........ModelTest...............Model......
-1......ClustalX 1.83..........PAUP.....Nexus......PAUP.
-2.........Modeltest.........paupblock............. 
-modelblockPAUPb10....paup....file.open..............paup.ML
-....model...........................
-3..........paupblock............model.scores....
-4...MrMTgui................MT path.PAUP path............
-Modeltest.paup.............................
-5..........select file...model.scores........
-Modeltest...............
-6..............hLRT..........AIC......
-Likelihood settings
-from best-fit model (TVM+G) selected by AIC in Modeltest 3.7 on Tue May 26 09:57:45 
-2009]
-BEGIN PAUP;
-Lset Base=(0.4370 0.1035 0.1546) Nst=6 Rmat=(0.2914 3.9607 2.9280 0.8550 3.9607) 
-Rates=gamma Shape=1.5528 Pinvar=0;
-Begin paup.........paup...........................
-
-
-.jModeltest .......
-
-.............cvtree
-
 Ref: Generate and Draw phylogenetic tree automatically   
 A. Generate phylogenetic tree using MEGA
 1. using MEGA-CC can generate phylogenetic tree automatically 
@@ -225,14 +196,14 @@ $ mysql -u root -p                                          # enter mysql
 mysql> create database itak;                          # create itak database
 $ mysql -uroot -p itak< itak_db_stru.mysql;      # import the structure of itak tables
 
-# load dataset to itak tables
-mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/domain_table" into table itak.domain;
-mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/family_table" into table itak.family;
-mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/gene_table" into table itak.gene;
-mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/family_summary" into table itak.family_summary;
-mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/gene_domain_table" into table itak.gene_domain;
-mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/gene_family_table" into table itak.gene_family;
-mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/gene_annotation" into table itak.gene_annotation;
+	# load dataset to itak tables
+	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/domain_table" into table itak.domain;
+	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/family_table" into table itak.family;
+	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/gene_table" into table itak.gene;
+	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/family_summary" into table itak.family_summary;
+	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/gene_domain_table" into table itak.gene_domain;
+	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/gene_family_table" into table itak.gene_family;
+	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/gene_annotation" into table itak.gene_annotation;
 
 # create user for itak database
 mysql> create user itak;
@@ -247,9 +218,9 @@ our $ftp_url = "ftp://bioinfo.bti.cornell.edu/pub/program/itak";
 our $http_url = "http://bioinfo.bti.cornell.edu/tool/itak";
 our $root_url = "http://bioinfo.bti.cornell.edu";
 
-* if you have any problem on mysql db, please check the mysql db card in Evernote
+#### * if you have any problem on mysql db, please check the mysql db card in Evernote
 
-Ref: The structure of iTAK database
+	Ref: The structure of iTAK database
 	mysql> use database;
 	mysql> show tables;
 	+-----------------+
