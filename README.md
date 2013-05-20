@@ -6,11 +6,11 @@ Pipeline For update iTAK Databse
  
     $parse_protein_id.pl
 
-    SeqID before parse: >g18373.t1|PACid:27562759
-    SeqID after parse : >g18373.t1
+		SeqID before parse: >g18373.t1|PACid:27562759
+		SeqID after parse : >g18373.t1
 
-    *Important*
-    After that, please add Rice and Arabidopsis output to your folder for making clusters. 
+		*Important*
+		After that, please add Rice and Arabidopsis output to your folder for making clusters. 
 
 2. Create a list for Plant peptide and cds sequences. The format of the list is like below:
 
