@@ -12,64 +12,41 @@ Pipeline For update iTAK Databse
 		*Important*
 		After that, please add Rice and Arabidopsis output to your folder for making clusters. 
 
-2. Create a list for Plant peptide and cds sequences. The format of the list is like below:
+### 2. Create a list for plant peptide and CDS sequences. The format of the list is like below:
 
-Each line include four columns, they are:
-     A: Path of peptide sequence
-     B: monocotyledon dicotyledon
-     C: Name of plant species
-     D: Path of CDS sequence
+		Each line include four columns, they are:
+		A: Path of peptide sequence
+		B: monocotyledon dicotyledon
+		C: Name of plant species
+		D: Path of CDS sequence
 
-Example:     
-publishedPlantGenome/apple_pep  dicotyledon     Apple   publishedPlantGenome/apple_cds
+		Example:
+		publishedPlantGenome/apple_pep  dicotyledon     Apple   publishedPlantGenome/apple_cds
 
-2. run iTAK.
+### 3. run iTAK.
 
-Command or make a bash for each specie: 
-perl itak_db_step1.pl  list
+		Command or make a bash for each specie:
+		$perl /path/iTAK.pl -i apple_pep
 
-perl ../../iTAK-1.2.x64/iTAK.pl -i grape_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i maize_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i cucumber_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i date_palm_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i medicago_truncatula_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i papaya_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i pigeonpea_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i poplar_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i potato_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i rice_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i selmo1_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i sorghum_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i soybean_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i strawberry_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i TAIR10_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i thellugiella_parvula_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i tomato_pep -a 2
-perl ../../iTAK-1.2.x64/iTAK.pl -i watermelon_pep -a 2
+		Input:
+		The peptide sequence
 
-Input:
-The list created in step 1. 
+		Output:
+		Each plant species will generates one output folder in publishedPlantGenome folder, and each folder will have 6 files:
+		apple_pep_pkaln : alignment of protein kinase  
+		apple_pep_pkcat : assign each gene to different PK families
+		apple_pep_pkseq : protein kinase sequences
+		apple_pep_tf_align : alignment of transcription factor
+		apple_pep_tf_family : assign each gene to TF families
+		apple_pep_tf_seq : TF sequences
 
-Output:
-Each line (species) will generates one output folder in publishedPlantGenome folder. 
-And each output will have 6 files:
-apple_pep_pkaln : alignment of protein kinase  
-apple_pep_pkcat : assign each gene to different PK families
-apple_pep_pkseq : protein kinase sequences
-apple_pep_tf_align : alignment of transcription factor
-apple_pep_tf_family : assign each gene to TF families
-apple_pep_tf_seq : TF sequences
+### 4. prepare files for iTAK database
 
-3. prepare files for iTAK database
-
-Command:
-perl itak_db_step2.pl  list
+		$perl itak_db_step2.pl  list
 
 ******************************
 The itak_db_step2.pl needs to be edit for some point. 
 Point A: convert CDS ID to protein ID : For some genomes, the CDS id is little difference with Protein ID, so we must change the ID to get CDS sequences. The point A has two place for both PKs and TFs.
-
-
 
 *******************************
 Input:
@@ -273,112 +250,112 @@ our $root_url = "http://bioinfo.bti.cornell.edu";
 * if you have any problem on mysql db, please check the mysql db card in Evernote
 
 Ref: The structure of iTAK database
-mysql> use database;
-mysql> show tables;
-+-----------------+
-| Tables_in_itak  |
-+-----------------+
-| domain          |
-| family          |
-| family_summary  |
-| gene            |
-| gene_annotation |
-| gene_domain     |
-| gene_family     |
-+-----------------+
+	mysql> use database;
+	mysql> show tables;
+	+-----------------+
+	| Tables_in_itak  |
+	+-----------------+
+	| domain          |
+	| family          |
+	| family_summary  |
+	| gene            |
+	| gene_annotation |
+	| gene_domain     |
+	| gene_family     |
+	+-----------------+
 
-use the mysql command to show structure of tables:
+	use the mysql command to show structure of tables:
 
-mysql> desc category;
-+----------+-------------+------+-----+---------+-------+
-| Field    | Type        | Null | Key | Default | Extra |
-+----------+-------------+------+-----+---------+-------+
-| organism | varchar(50) | NO   | MUL | NULL    |       |
-| category | varchar(50) | NO   |     | NULL    |       |
-+----------+-------------+------+-----+---------+-------+
+	mysql> desc category;
+	+----------+-------------+------+-----+---------+-------+
+	| Field    | Type        | Null | Key | Default | Extra |
+	+----------+-------------+------+-----+---------+-------+
+	| organism | varchar(50) | NO   | MUL | NULL    |       |
+	| category | varchar(50) | NO   |     | NULL    |       |
+	+----------+-------------+------+-----+---------+-------+
 
-mysql> desc domain;
-+-------------+-------------+------+-----+---------+-------+
-| Field       | Type        | Null | Key | Default | Extra |
-+-------------+-------------+------+-----+---------+-------+
-| domain_ID   | varchar(15) | NO   | PRI | NULL    |       |
-| domain_desc | text        | YES  |     | NULL    |       |
-| category    | varchar(15) | YES  |     | NULL    |       |
-+-------------+-------------+------+-----+---------+-------+
-This table do not need update!!!
+	mysql> desc domain;
+	+-------------+-------------+------+-----+---------+-------+
+	| Field       | Type        | Null | Key | Default | Extra |
+	+-------------+-------------+------+-----+---------+-------+
+	| domain_ID   | varchar(15) | NO   | PRI | NULL    |       |
+	| domain_desc | text        | YES  |     | NULL    |       |
+	| category    | varchar(15) | YES  |     | NULL    |       |
+	+-------------+-------------+------+-----+---------+-------+
+	This table do not need update!!!
 
-mysql> desc family;
-+-------------+--------------+------+-----+---------+-------+
-| Field       | Type         | Null | Key | Default | Extra |
-+-------------+--------------+------+-----+---------+-------+
-| family_acc  | varchar(25)  | NO   | PRI | NULL    |       |
-| description | varchar(255) | YES  |     | NULL    |       |
-| category    | varchar(50)  | YES  |     | NULL    |       |
-+-------------+--------------+------+-----+---------+-------+
-This table do not need update!!!
+	mysql> desc family;
+	+-------------+--------------+------+-----+---------+-------+
+	| Field       | Type         | Null | Key | Default | Extra |
+	+-------------+--------------+------+-----+---------+-------+
+	| family_acc  | varchar(25)  | NO   | PRI | NULL    |       |
+	| description | varchar(255) | YES  |     | NULL    |       |
+	| category    | varchar(50)  | YES  |     | NULL    |       |
+	+-------------+--------------+------+-----+---------+-------+
+	This table do not need update!!!
 
-mysql> desc family_summary;
-+-------------+-------------+------+-----+---------+-------+
-| Field       | Type        | Null | Key | Default | Extra |
-+-------------+-------------+------+-----+---------+-------+
-| family_acc  | varchar(25) | NO   | PRI | NULL    |       |
-| Number_gene | smallint(6) | YES  |     | NULL    |       |
-| organism    | varchar(50) | NO   | PRI | NULL    |       |
-+-------------+-------------+------+-----+---------+-------+
+	mysql> desc family_summary;
+	+-------------+-------------+------+-----+---------+-------+
+	| Field       | Type        | Null | Key | Default | Extra |
+	+-------------+-------------+------+-----+---------+-------+
+	| family_acc  | varchar(25) | NO   | PRI | NULL    |       |
+	| Number_gene | smallint(6) | YES  |     | NULL    |       |
+	| organism    | varchar(50) | NO   | PRI | NULL    |       |
+	+-------------+-------------+------+-----+---------+-------+
 
-mysql> desc gene;
-+-------------+-------------+------+-----+---------+-------+
-| Field       | Type        | Null | Key | Default | Extra |
-+-------------+-------------+------+-----+---------+-------+
-| gene_ID     | varchar(50) | NO   | PRI | NULL    |       |
-| protein_seq | text        | YES  |     | NULL    |       |
-| CDS_seq     | text        | YES  |     | NULL    |       |
-| organism    | varchar(50) | NO   | PRI |         |       |
-+-------------+-------------+------+-----+---------+-------+
+	mysql> desc gene;
+	+-------------+-------------+------+-----+---------+-------+
+	| Field       | Type        | Null | Key | Default | Extra |
+	+-------------+-------------+------+-----+---------+-------+
+	| gene_ID     | varchar(50) | NO   | PRI | NULL    |       |
+	| protein_seq | text        | YES  |     | NULL    |       |
+	| CDS_seq     | text        | YES  |     | NULL    |       |
+	| organism    | varchar(50) | NO   | PRI |         |       |
+	+-------------+-------------+------+-----+---------+-------+
 
-mysql> desc gene_annotation;
-+-------------+-------------+------+-----+---------+-------+
-| Field       | Type        | Null | Key | Default | Extra |
-+-------------+-------------+------+-----+---------+-------+
-| trans_ID    | varchar(50) | NO   | PRI | NULL    |       |
-| gene_ID     | varchar(50) | NO   |     | NULL    |       |
-| protein_seq | text        | YES  |     | NULL    |       |
-| CDS_seq     | text        | YES  |     | NULL    |       |
-| organism    | varchar(50) | NO   | PRI |         |       |
-+-------------+-------------+------+-----+---------+-------+
+	mysql> desc gene_annotation;
+	+-------------+-------------+------+-----+---------+-------+
+	| Field       | Type        | Null | Key | Default | Extra |
+	+-------------+-------------+------+-----+---------+-------+
+	| trans_ID    | varchar(50) | NO   | PRI | NULL    |       |
+	| gene_ID     | varchar(50) | NO   |     | NULL    |       |
+	| protein_seq | text        | YES  |     | NULL    |       |
+	| CDS_seq     | text        | YES  |     | NULL    |       |
+	| organism    | varchar(50) | NO   | PRI |         |       |
+	+-------------+-------------+------+-----+---------+-------+
 
-+----------+-------------+------+-----+---------+-------+
-| Field    | Type        | Null | Key | Default | Extra |
-+----------+-------------+------+-----+---------+-------+
-| gene_ID  | varchar(50) | NO   | PRI | NULL    |       |
-| hit_acc  | varchar(50) | NO   | PRI | NULL    |       |
-| hit_desc | text        | NO   |     | NULL    |       |
-| score    | float       | NO   |     | NULL    |       |
-| evalue   | varchar(10) | NO   |     | NULL    |       |
-+----------+-------------+------+-----+---------+-------+
+	+----------+-------------+------+-----+---------+-------+
+	| Field    | Type        | Null | Key | Default | Extra |
+	+----------+-------------+------+-----+---------+-------+
+	| gene_ID  | varchar(50) | NO   | PRI | NULL    |       |
+	| hit_acc  | varchar(50) | NO   | PRI | NULL    |       |
+	| hit_desc | text        | NO   |     | NULL    |       |
+	| score    | float       | NO   |     | NULL    |       |
+	| evalue   | varchar(10) | NO   |     | NULL    |       |
+	+----------+-------------+------+-----+---------+-------+
 
-mysql> desc gene_domain;
-+--------------+-------------+------+-----+---------+-------+
-| Field        | Type        | Null | Key | Default | Extra |
-+--------------+-------------+------+-----+---------+-------+
-| gene_ID      | varchar(50) | NO   | PRI |         |       |
-| domain_ID    | varchar(50) | NO   | PRI |         |       |
-| query_start  | smallint(6) | NO   | PRI | 0       |       |
-| query_end    | smallint(6) | NO   | PRI | 0       |       |
-| target_start | smallint(6) | YES  |     | NULL    |       |
-| target_end   | smallint(6) | YES  |     | NULL    |       |
-| align_query  | text        | YES  |     | NULL    |       |
-| align_string | text        | YES  |     | NULL    |       |
-| align_hit    | text        | YES  |     | NULL    |       |
-| score        | float       | YES  |     | NULL    |       |
-| evalue       | varchar(10) | YES  |     | NULL    |       |
-+--------------+-------------+------+-----+---------+-------+
+	mysql> desc gene_domain;
+	+--------------+-------------+------+-----+---------+-------+
+	| Field        | Type        | Null | Key | Default | Extra |
+	+--------------+-------------+------+-----+---------+-------+
+	| gene_ID      | varchar(50) | NO   | PRI |         |       |
+	| domain_ID    | varchar(50) | NO   | PRI |         |       |
+	| query_start  | smallint(6) | NO   | PRI | 0       |       |
+	| query_end    | smallint(6) | NO   | PRI | 0       |       |
+	| target_start | smallint(6) | YES  |     | NULL    |       |
+	| target_end   | smallint(6) | YES  |     | NULL    |       |
+	| align_query  | text        | YES  |     | NULL    |       |
+	| align_string | text        | YES  |     | NULL    |       |
+	| align_hit    | text        | YES  |     | NULL    |       |
+	| score        | float       | YES  |     | NULL    |       |
+	| evalue       | varchar(10) | YES  |     | NULL    |       |
+	+--------------+-------------+------+-----+---------+-------+
 
-mysql> desc gene_family;
-+------------+-------------+------+-----+---------+-------+
-| Field      | Type        | Null | Key | Default | Extra |
-+------------+-------------+------+-----+---------+-------+
-| gene_ID    | varchar(50) | NO   | PRI | NULL    |       |
-| family_acc | varchar(25) | NO   | PRI | NULL    |       |
-+------------+-------------+------+-----+---------+-------+
+	mysql> desc gene_family;
+	+------------+-------------+------+-----+---------+-------+
+	| Field      | Type        | Null | Key | Default | Extra |
+	+------------+-------------+------+-----+---------+-------+
+	| gene_ID    | varchar(50) | NO   | PRI | NULL    |       |
+	| family_acc | varchar(25) | NO   | PRI | NULL    |       |
+	+------------+-------------+------+-----+---------+-------+
 
