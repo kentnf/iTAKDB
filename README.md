@@ -56,7 +56,7 @@ Pipeline For update iTAK Databse
 		Output:
 		The output includes files that categorized to five parts (folders) for iTAK databases.
 
-     		1. for_database -- include files that need to imported to mysql database
+     1. for_database -- include files that need to imported to mysql database
           
 		family_summary  
 		* gene_annotation_table  
