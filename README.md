@@ -15,13 +15,14 @@ Pipeline For update iTAK Databse
 ### 2. Create a list for plant peptide and CDS sequences. The format of the list is like below:
 
 		Each line include four columns, they are:
-		A: Path of peptide sequence
+		A: peptide sequence
 		B: monocotyledon dicotyledon
 		C: Name of plant species
-		D: Path of CDS sequence
+		D: CDS sequence
+		E: transcirpt & gene file
 
 		Example:
-		publishedPlantGenome/apple_pep  dicotyledon     Apple   publishedPlantGenome/apple_cds
+		publishedPlantGenome/apple_pep  dicotyledon     Apple   publishedPlantGenome/apple_cds   publishedPlantGenome/apple_trans_gene
 
 ### 3. run iTAK.
 
