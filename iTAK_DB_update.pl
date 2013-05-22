@@ -102,9 +102,6 @@ unless ( -s $clustalw2_program ) { die "Error, can not locate clustalw2 program 
 #================================================================
 # list file into to hash					
 #================================================================
-my @cotyledon = ("monocotyledon", "dicotyledon", "non-angiosperms");
-my @species;
-
 # init hash for clustering : key1: cyto; key2: species; key3: TF or PK; value: genes (tab delimit)
 my %itak_obj;
 
@@ -360,9 +357,12 @@ foreach my $cotyledon (sort keys %itak_obj)
 			#my $cluster_file = "for_cluster/".$cotyledon."/".$type."/".$sp."_".$fm.".pep";
 			my $cluster_file = "for_cluster/".$sp."_".$fm.".pep";
 			my $tree_file    = "for_tree/".$sp."_".$fm.".pep";
-
 			my $cluster_align= "for_cluster/".$sp."_".$fm.".aln";
 			my $tree_align   = "for_tree/".$sp."_".$fm.".aln";
+			my $cluster_phb  = "for_cluster/".$sp."_".$fm.".phb";
+			my $tree_phb     = "for_tree/".$sp."_".$fm.".phb";
+			my $cluster_nwk  = "for_cluster/".$sp."_".$fm.".nwk";
+			my $tree_nwk     = "for_tree/".$sp."_".$fm.".nwk";
 
 			my $fh1 = IO::File->new(">".$cluster_file) || die "Can not open cluster file $cluster_file $!\n";
 			print $fh1 $protein_seq1;
@@ -377,10 +377,22 @@ foreach my $cotyledon (sort keys %itak_obj)
 			my $cluster_cmd2 = "$clustalw2_program -INFILE=$cluster_file -PROFILE1=$cluster_align -BOOTSTRAP=100";
 			my $tree_cmd1 = "$clustalw2_program -INFILE=$tree_file -ALIGN";
 			my $tree_cmd2 = "$clustalw2_program -INFILE=$tree_file -PROFILE1=$tree_align -BOOTSTRAP=100";
-			system($cluster_cmd1) && die "Error in command $cluster_cmd1\n";
-			system($cluster_cmd2) && die "Error in command $cluster_cmd2\n";
-			system($tree_cmd1) && die "Error in command $tree_cmd1\n";
-			system($tree_cmd2) && die "Error in command $tree_cmd2\n";
+			
+			unless (-s $cluster_nwk) 
+			{
+				system($cluster_cmd1) && die "Error in command $cluster_cmd1\n";
+				system($cluster_cmd2) && die "Error in command $cluster_cmd2\n";
+				unless (-s $cluster_phb) { die "Error, do not have phb file $cluster_phb\n"; }
+				phb2nwk($cluster_phb, $cluster_nwk);
+			}
+
+			unless (-s $tree_nwk)
+			{
+				system($tree_cmd1) && die "Error in command $tree_cmd1\n";
+				system($tree_cmd2) && die "Error in command $tree_cmd2\n";
+				unless (-s $tree_phb) { die "Error, do not have phb file $tree_phb\n"; }
+				phb2nwk($tree_phb, $tree_nwk);
+			}
 
 			# number of gene in each family
 			$family_sum{$species}{$family} = scalar(keys(%main_gene));
@@ -388,21 +400,6 @@ foreach my $cotyledon (sort keys %itak_obj)
 		}
 	}
 }
-
-#===============================================================#
-# Put Potato ID information to hash				#
-#===============================================================#
-my %potato_protein_trans_hash;
-my $potato_id_table = "publishedPlantGenome/potato_annotation/PGSC_DM_v3.4_gene_nonredundant_chr_v2.1.10_relation";
-my $pfh = IO::File->new($potato_id_table) || die "Can not open file $potato_id_table $!\n";
-while(<$pfh>)
-{
-	chomp;
-	if ($_ =~ m/^#/) { next; }
-	my @a = split(/\t/, $_);
-	$potato_protein_trans_hash{$a[0]} = $a[1];
-}
-$pfh->close;
 
 #===============================================================#
 # generate files for download					#
@@ -713,4 +710,38 @@ sub parse_seq_for_blast
 	}
 	$in->close;
 	$out->close;
+}
+
+sub phb2nwk
+{
+        my ($phb, $nwk) = @_;
+
+        my $fh_phb = IO::File->new($phb) || die "Can not open phb file: $phb \n";
+        my $fh_nwk = IO::File->new(">".$nwk) || die "Can not open nwk file: $nwk \n";
+
+        while(<$fh_phb>)
+        {
+                chomp;
+                if ($_ =~ m/^:(\d+)\.(\d+)\[(\d+)\](.*)/)
+                {
+                        print $fh_nwk $3.":".$1.".".$2.$4;
+                }
+                elsif ($_ =~ m/^(\S+):(\d+)\.(\d+)(.*)/)
+                {
+                        print $fh_nwk $_;
+                }
+                elsif ($_ =~ m/^(\S+):-(\d+)\.(\d+)(.*)/)
+                {
+                        print $fh_nwk $1.":0.000".$4;
+                }
+                else
+                {
+                        print $fh_nwk $_;
+                }
+        }
+
+        print $fh_nwk $_;
+
+        $fh_phb->close;
+        $fh_nwk->close;
 }

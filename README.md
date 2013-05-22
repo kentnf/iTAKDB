@@ -4,41 +4,41 @@ Pipeline For update iTAK Databse
 
 ### 1. Parse protein and CDS sequence ID:
  
-		$parse_protein_id.pl
+     $parse_protein_id.pl
 
 		SeqID before parse: >g18373.t1|PACid:27562759
 		SeqID after parse : >g18373.t1
 
-		*Important*
-		After that, please add Rice and Arabidopsis output to your folder for making clusters. 
+     *Important*
+     After that, please add Rice and Arabidopsis output to your folder for making clusters. 
 
 ### 2. Create a list for plant peptide and CDS sequences. The format of the list is like below:
 
-		Each line include five columns, they are:
+     Each line include five columns, they are:
 		A: peptide sequence
 		B: monocotyledon dicotyledon
 		C: Name of plant species
 		D: CDS sequence
 		E: protein & transcirpt & gene file
 
-		Example:
+     Example:
 		publishedPlantGenome/apple_pep  dicotyledon     Apple   publishedPlantGenome/apple_cds   publishedPlantGenome/apple_trans_gene
 
-		Each line of protein & transcirpt & gene file include three columns:
+     Each line of protein & transcirpt & gene file include three columns:
 		A: protein ID
 		B: transcript ID
 		C: gene ID
 
 ### 3. run iTAK.
 
-		Command or make a bash for each specie:
-		$perl /path/iTAK.pl -i apple_pep
+     Command or make a bash for each specie:
+     		$perl /path/iTAK.pl -i apple_pep
 
-		Input:
-		The peptide sequence
+     Input:
+     		The peptide sequence
 
-		Output:
-		Each plant species will generates one output folder in publishedPlantGenome folder, and each folder will have 6 files:
+     Output:
+     		Each plant species will generates one output folder in publishedPlantGenome folder, and each folder will have 6 files:
 		apple_pep_pkaln : alignment of protein kinase  
 		apple_pep_pkcat : assign each gene to different PK families
 		apple_pep_pkseq : protein kinase sequences
@@ -58,6 +58,7 @@ Pipeline For update iTAK Databse
 
      1. for_database -- include files that need to imported to mysql database
           
+		category
 		family_summary  
 		protein_domain_table  
 		protein_family_table  
@@ -104,7 +105,8 @@ Pipeline For update iTAK Databse
      command for import these files to database: 
      LOAD DATA LOCAL INFILE 'family_summary' INTO TABLE `family` FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
 
-     Here is the command for importing each table: 
+     Here is the command for importing each table:
+		mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/category" into table itak.categroy;
 		mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/gene_table" into table itak.gene;
 		mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/family_summary" into table itak.family_summary;
 		mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/protein_domain_table" into table itak.gene_domain;
@@ -157,13 +159,14 @@ Ref: How to backup/install iTAK database on a different computer
 	$ mysql -uroot -p itak< itak_db_stru.mysql;      # import the structure of itak tables
 
 	# load dataset to itak tables
-	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/domain_table" into table itak.domain;
-	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/family_table" into table itak.family;
-	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/gene_table" into table itak.gene;
-	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/family_summary" into table itak.family_summary;
-	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/gene_domain_table" into table itak.gene_domain;
-	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/gene_family_table" into table itak.gene_family;
-	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/version2/gene_annotation" into table itak.gene_annotation;
+	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/category" into table itak.categroy;
+	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/domain_table" into table itak.domain;
+	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/family_table" into table itak.family;
+	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/gene_table" into table itak.gene;
+	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/family_summary" into table itak.family_summary;
+	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/gene_domain_table" into table itak.gene_domain;
+	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/gene_family_table" into table itak.gene_family;
+	mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/gene_annotation" into table itak.gene_annotation;
 
 # create user for itak database
 	mysql> create user itak;
