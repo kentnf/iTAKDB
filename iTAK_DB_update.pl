@@ -95,6 +95,10 @@ $cfh->close;
 if ($has_dicotyledon) 	{ unless (defined $species{"Arabidopsis"}) { die "Error, no Arabidopsis\n"; } }
 if ($has_monocotyledon)	{ unless (defined $species{"Rice"}) { die "Error, no Rice\n"; } }
 
+# check the cluster program
+my $clustalw2_program = ${FindBin::RealBin}."/bin/clustalw2";
+unless ( -s $clustalw2_program ) { die "Error, can not locate clustalw2 program in $clustalw2_program\n"; }
+
 #================================================================
 # list file into to hash					
 #================================================================
@@ -201,7 +205,8 @@ while(<$fh>)
 			if (defined $trans_gene{$transcript_id}) 
 			{ 
 				die "Error, transcrips $transcript_id has two corresponding gene IDs :".
-				    " $trans_gene{$transcript_id} and $gene_id\n"; }
+				    " $trans_gene{$transcript_id} and $gene_id\n"; 
+			}
 			else 
 			{
 				$trans_gene{$transcript_id} = $gene_id;
@@ -356,8 +361,8 @@ foreach my $cotyledon (sort keys %itak_obj)
 			my $cluster_file = "for_cluster/".$sp."_".$fm.".pep";
 			my $tree_file    = "for_tree/".$sp."_".$fm.".pep";
 
-			#print $gfh $cluster_file."\tnocluster\n";
-			#print $gfh $tree_file."\tnocluster\n";
+			my $cluster_align= "for_cluster/".$sp."_".$fm.".aln";
+			my $tree_align   = "for_tree/".$sp."_".$fm.".aln";
 
 			my $fh1 = IO::File->new(">".$cluster_file) || die "Can not open cluster file $cluster_file $!\n";
 			print $fh1 $protein_seq1;
@@ -366,10 +371,16 @@ foreach my $cotyledon (sort keys %itak_obj)
 			my $fh2 = IO::File->new(">".$tree_file) || die "Can not open tree file $tree_file $!\n";
 			print $fh2 $protein_seq2;
 			$fh2->close;
-
-			#=======================================#
-			# add phyTree code here			#
-			#=======================================#
+			
+			# generate tree 			
+			my $cluster_cmd1 = "$clustalw2_program -INFILE=$cluster_file -ALIGN";
+			my $cluster_cmd2 = "$clustalw2_program -INFILE=$cluster_file -PROFILE1=$cluster_align -BOOTSTRAP=100";
+			my $tree_cmd1 = "$clustalw2_program -INFILE=$tree_file -ALIGN";
+			my $tree_cmd2 = "$clustalw2_program -INFILE=$tree_file -PROFILE1=$tree_align -BOOTSTRAP=100";
+			system($cluster_cmd1) && die "Error in command $cluster_cmd1\n";
+			system($cluster_cmd2) && die "Error in command $cluster_cmd2\n";
+			system($tree_cmd1) && die "Error in command $tree_cmd1\n";
+			system($tree_cmd2) && die "Error in command $tree_cmd2\n";
 
 			# number of gene in each family
 			$family_sum{$species}{$family} = scalar(keys(%main_gene));
