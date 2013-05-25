@@ -1,0 +1,92 @@
+#ID	Description	Type
+PPC:1.1.1	Leucine-rich transmembrane protein kinase/Strubbelig Receptor Family 1	protein kinase	
+PPC:1.1.2	Putative protein kinase/Ser_thr kinase like protein/Putative receptor-like protein kinase	protein kinase	
+PPC:1.1.3	Putative protein kinase/Putative receptor-like protein kinase	protein kinase	
+PPC:1.1.4	putative protein kinase	protein kinase	
+PPC:1.1.5	protein kinase like receptor like protein kinase/putative ser_thr-specific receptor protein/Ser_thr-specific protein kinase like putative	protein kinase	
+PPC:1.10.1	Receptor Like Cytoplasmic Kinase VI	protein kinase	
+PPC:1.11.1	Legume Lectin Domain Kinase	protein kinase	
+PPC:1.12.1	Leucine Rich Repeat Kinase X	protein kinase	
+PPC:1.12.2	Leucine Rich Repeat Kinase II & X	protein kinase	
+PPC:1.12.3	Leucine Rich Repeat Kinase VII	protein kinase	
+PPC:1.12.4	Leucine Rich Repeat Kinase XI & XII	protein kinase	
+PPC:1.12.5	Leucine Rich Repeat Kinase X	protein kinase	
+PPC:1.13.1	Leucine Rich Repeat Kinase VII	protein kinase	
+PPC:1.13.2	Leucine Rich Repeat Kinase IV	protein kinase	
+PPC:1.13.3	Leucine Rich Repeat Kinase III	protein kinase	
+PPC:1.13.4	Leucine Rich Repeat Kinase III	protein kinase	
+PPC:1.13.5	Leucine Rich Repeat Kinase III	protein kinase	
+PPC:1.14.1	Crinkly 4 Like Kinase	protein kinase	
+PPC:1.14.2	Receptor Like Cytoplasmic Kinase IX	protein kinase	
+PPC:1.14.3	DUF26 Kinase	protein kinase	
+PPC:1.15.1	Receptor Like Cytoplasmic Kinase I	protein kinase	
+PPC:1.15.2	Leucine Rich Repeat Kinase VI	protein kinase	
+PPC:1.15.3	Leucine Rich Repeat Kinase IV	protein kinase	
+PPC:1.16.1	Receptor Like Cytoplasmic Kinase II	protein kinase	
+PPC:1.17.1	Wall Associated Kinase	protein kinase	
+PPC:1.2.1	Receptor Like Cytoplasmic Kinase VIII	protein kinase	
+PPC:1.2.2	Receptor Like Cytoplasmic Kinase VII	protein kinase	
+PPC:1.2.5	ser_thr protein kinase like protein	protein kinase	
+PPC:1.3.1	Receptor-like protein kinase	protein kinase	
+PPC:1.3.2	Leucine Rich Repeat Receptor VIII	protein kinase	
+PPC:1.3.3	Leucine Rich Repeat Receptor Kinase I & Unknown Receptor Kinase I	protein kinase	
+PPC:1.3.7	Receptor like protein kinase/Receptor lectin kinase like protein	protein kinase	
+PPC:1.4.1	Crinkly 4 Like Kinase	protein kinase	
+PPC:1.4.2	Tousled like kinase	protein kinase	
+PPC:1.5.1	Wall Associated Kinase-like Kinase	protein kinase	
+PPC:1.5.2	LRK10 Like Kinase (Type 1)	protein kinase	
+PPC:1.5.3	Receptor Like Cytoplasmic Kinase IV	protein kinase	
+PPC:1.6.1	Leucine Rich Repeat Kinase IX	protein kinase	
+PPC:1.6.2	Plant External Response Like Kinase	protein kinase	
+PPC:1.6.3	Receptor Like Cytoplasmic Kinase V	protein kinase	
+PPC:1.6.4	RKF3 Like Kinase	protein kinase	
+PPC:1.7.1	S Domain Kinase (Type 1)	protein kinase	
+PPC:1.7.2	Domain of Unknown Function 26 (DUF26) Kinase	protein kinase	
+PPC:1.8.1	Leucine Rich Repeat Kinase I	protein kinase	
+PPC:1.9.1	CRPK1 Like Kinase (Types 1 and 2)	protein kinase	
+PPC:1.9.2	S Domain Kinase (Type 2)	protein kinase	
+PPC:1.9.3	Putative receptor like protein kinase	protein kinase	
+PPC:1.9.5	Putative LRR receptor-like protein kinase/Receptor protein kinase like protein	protein kinase	
+PPC:1.Other	Other Protein Kinase	protein kinase	
+PPC:2.1.1	Light Sensor Kinase	protein kinase	
+PPC:2.1.2	Ankyrin Repeat Domain Kinase	protein kinase	
+PPC:2.1.3	CTR1/EDR1 Kinase	protein kinase	
+PPC:2.1.4	GmPK6/AtMRK1 Family	protein kinase	
+PPC:2.1.5	ATN1 Like Family	protein kinase	
+PPC:2.1.6	Unknown Function Kinase	protein kinase	
+PPC:2.2.1	Unknown Function Kinase	protein kinase	
+PPC:2.2.2	C-terminal Ankyrin Repeat Domain Kinase	protein kinase	
+PPC:3.1.1	Casein Kinase I Family	protein kinase	
+PPC:4.1.1	MAP3K	protein kinase	
+PPC:4.1.2	STE20-PAK Like Protein Kinase	protein kinase	
+PPC:4.1.3	MAP2K	protein kinase	
+PPC:4.1.4	MAP2K	protein kinase	
+PPC:4.1.5	Possible MAP2K	protein kinase	
+PPC:4.1.5.1	WNK like kinase - with no lysine kinase	protein kinase	
+PPC:4.1.6	Unknown Function Kinase	protein kinase	
+PPC:4.1.7	APG1 Like Kinase	protein kinase	
+PPC:4.2.1	Calcium Dependent Protein Kinase	protein kinase	
+PPC:4.2.2	Phosphoenolpyruvate Carboxylase Kinase	protein kinase	
+PPC:4.2.3	Calcium/Calmodulin Dependent Protein Kinase (CCamK)	protein kinase	
+PPC:4.2.4	SNF1 Related Protein Kinase (SnRK)	protein kinase	
+PPC:4.2.5	Unknown Function Kinase	protein kinase	
+PPC:4.2.6	IRE/NPH/PI dependent/S6 Kinase	protein kinase	
+PPC:4.2.7	ELM1/PAK1/TOS3 Like Kinase	protein kinase	
+PPC:4.3.1	Unknown Function Kinase	protein kinase	
+PPC:4.3.2	Unknown Function Kinase	protein kinase	
+PPC:4.4.1	Unknown Function Kinase	protein kinase	
+PPC:4.4.2	Unknown Function Kinase	protein kinase	
+PPC:4.4.3	Unknown Function Kinase	protein kinase	
+PPC:4.4.4	Unknown Function Kinase	protein kinase	
+PPC:4.5.1	MAPK Family	protein kinase	
+PPC:4.5.1.1	Male grem cell-associated kinase (mak)	protein kinase	
+PPC:4.5.2	CDC2 Like Kinase Family	protein kinase	
+PPC:4.5.3	Casein Kinase II Family	protein kinase	
+PPC:4.5.4	GSK3/Shaggy Like Protein Kinase Family	protein kinase	
+PPC:4.5.5	Unknown Function Kinase	protein kinase	
+PPC:4.5.6	LAMMER Kinase Family	protein kinase	
+PPC:4.5.7	Unknown Function Kinase	protein kinase	
+PPC:4.5.8	Unknown Function Kinase	protein kinase	
+PPC:5.1.1	Other Kinase	protein kinase	
+PPC:5.1.2	Other Kinase	protein kinase	
+PPC:5.2.1	Other Kinase	protein kinase	

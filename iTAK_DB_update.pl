@@ -270,7 +270,11 @@ while(<$fh>)
 	while(my $inseq = $in->next_seq)
 	{
 		my $trans_id = $inseq->id;
+
+		unless (defined $trans_protein{$trans_id} ) { die "Error in transcript id $trans_id, do not have protein ID $species\n"; }
+
 		my $protein_id = $trans_protein{$trans_id};
+		
 		if ( defined $protein_seq{$protein_id} )
 		{
 			$transcript_seq{$inseq->id} = $inseq->seq;
@@ -307,7 +311,7 @@ foreach my $cotyledon (sort keys %itak_obj)
 		foreach my $family (sort keys %{$itak_obj{$cotyledon}{$species}})
 		{
 			# get pep sequence base on cluster family
-			my ($protein_seq1, $protein_seq2) = ("", "");
+			my ($protein_seq1, $protein_seq2) = ("", "", "");
 			
 			my $main_gene_id; my %main_gene;
 			my @proteins = split(/\t/, $itak_obj{$cotyledon}{$species}{$family});
@@ -315,7 +319,7 @@ foreach my $cotyledon (sort keys %itak_obj)
 				unless (defined $protein_seq{$protein_id}) { die "Error, do not have seq for $protein_id\n"; }
 				$protein_seq1 .= ">".$protein_id."\n".$protein_seq{$protein_id}."\n";
 				$protein_seq2 .= ">".$protein_id."\n".$protein_seq{$protein_id}."\n";
-
+				
 				unless (defined $protein_trans{$protein_id}) { die "Error, do not have transcript id for $protein_id\n"; }
 				my $transcript_id = $protein_trans{$protein_id};
 				$main_gene_id = $trans_gene{$transcript_id};
@@ -324,18 +328,24 @@ foreach my $cotyledon (sort keys %itak_obj)
 
 			if ($cotyledon eq "dicotyledon") {
 				if ($species ne "Arabidopsis") {
-					my @di_proteins = split(/\t/, $itak_obj{"dicotyledon"}{"Arabidopsis"}{$family});
-					foreach my $protein_id ( @di_proteins ) {
-						unless (defined $protein_seq{$protein_id}) { die "Error, do not have seq for $protein_id\n"; }
-						$protein_seq1 .= ">".$protein_id."\n".$protein_seq{$protein_id}."\n";
+					if ( defined $itak_obj{"dicotyledon"}{"Arabidopsis"}{$family} )
+					{
+						my @di_proteins = split(/\t/, $itak_obj{"dicotyledon"}{"Arabidopsis"}{$family});
+						foreach my $protein_id ( @di_proteins ) {
+							unless (defined $protein_seq{$protein_id}) { die "Error, do not have seq for $protein_id\n"; }
+							$protein_seq1 .= ">".$protein_id."\n".$protein_seq{$protein_id}."\n";
+						}
 					}
 				}
 			} elsif ( $cotyledon eq "monocotyledon") {
 				if ($species ne "Rice") {
-					my @mono_proteins = split(/\t/, $itak_obj{"monocotyledon"}{"Rice"}{$family});
-					foreach my $protein_id (@mono_proteins) {
-						unless (defined $protein_seq{$protein_id}) { die "Error, do not have seq for $protein_id\n"; }
-						$protein_seq1 .= ">".$protein_id."\n".$protein_seq{$protein_id}."\n";
+					if ( defined $itak_obj{"monocotyledon"}{"Rice"}{$family} )
+					{
+						my @mono_proteins = split(/\t/, $itak_obj{"monocotyledon"}{"Rice"}{$family});
+						foreach my $protein_id (@mono_proteins) {
+							unless (defined $protein_seq{$protein_id}) { die "Error, do not have seq for $protein_id\n"; }
+							$protein_seq1 .= ">".$protein_id."\n".$protein_seq{$protein_id}."\n";
+						}
 					}
 				}
 			} elsif ( $cotyledon eq "non-angiosperms") {
@@ -357,12 +367,6 @@ foreach my $cotyledon (sort keys %itak_obj)
 			#my $cluster_file = "for_cluster/".$cotyledon."/".$type."/".$sp."_".$fm.".pep";
 			my $cluster_file = "for_cluster/".$sp."_".$fm.".pep";
 			my $tree_file    = "for_tree/".$sp."_".$fm.".pep";
-			my $cluster_align= "for_cluster/".$sp."_".$fm.".aln";
-			my $tree_align   = "for_tree/".$sp."_".$fm.".aln";
-			my $cluster_phb  = "for_cluster/".$sp."_".$fm.".phb";
-			my $tree_phb     = "for_tree/".$sp."_".$fm.".phb";
-			my $cluster_nwk  = "for_cluster/".$sp."_".$fm.".nwk";
-			my $tree_nwk     = "for_tree/".$sp."_".$fm.".nwk";
 
 			my $fh1 = IO::File->new(">".$cluster_file) || die "Can not open cluster file $cluster_file $!\n";
 			print $fh1 $protein_seq1;
@@ -372,27 +376,8 @@ foreach my $cotyledon (sort keys %itak_obj)
 			print $fh2 $protein_seq2;
 			$fh2->close;
 			
-			# generate tree 			
-			my $cluster_cmd1 = "$clustalw2_program -INFILE=$cluster_file -ALIGN";
-			my $cluster_cmd2 = "$clustalw2_program -INFILE=$cluster_file -PROFILE1=$cluster_align -BOOTSTRAP=100";
-			my $tree_cmd1 = "$clustalw2_program -INFILE=$tree_file -ALIGN";
-			my $tree_cmd2 = "$clustalw2_program -INFILE=$tree_file -PROFILE1=$tree_align -BOOTSTRAP=100";
-			
-			unless (-s $cluster_nwk) 
-			{
-				system($cluster_cmd1) && die "Error in command $cluster_cmd1\n";
-				system($cluster_cmd2) && die "Error in command $cluster_cmd2\n";
-				unless (-s $cluster_phb) { die "Error, do not have phb file $cluster_phb\n"; }
-				phb2nwk($cluster_phb, $cluster_nwk);
-			}
-
-			unless (-s $tree_nwk)
-			{
-				system($tree_cmd1) && die "Error in command $tree_cmd1\n";
-				system($tree_cmd2) && die "Error in command $tree_cmd2\n";
-				unless (-s $tree_phb) { die "Error, do not have phb file $tree_phb\n"; }
-				phb2nwk($tree_phb, $tree_nwk);
-			}
+			cluster($cluster_file);
+			cluster($tree_file);
 
 			# number of gene in each family
 			$family_sum{$species}{$family} = scalar(keys(%main_gene));
@@ -443,70 +428,12 @@ foreach my $protein_id (sort keys %protein_family)
 		{
 			print $dfh3 ">".$protein_id."\t".$family." ".$pk_desc{$family}."\n".$protein_seq{$protein_id}."\n";
 			print $dfh4 ">".$transcript_id."\t".$family." ".$pk_desc{$family}."\n".$transcript_seq{$transcript_id}."\n";
-		
-=head	
-			if (defined $gene_cds{$gene_id}) 
-			{
-				$protein_cds_ID{$gene_id} = $gene_id;
-				print $dfh3 ">".$gene_id."\t".$family." ".$pk_desc{$family}."\n".$gene_cds{$gene_id}."\n";
-			} else {
-	
-				#################################
-				# Poirnt A			#
-				#################################
-				# convert CDS ID to protein ID	#
-				#################################
-				my $cds_id;
-				if ( $gene_id=~ m/_FGP/ ) {		  # Maize AC195959.2_FGP004  AC195959.2_FGT004
-					$cds_id = $gene_id; $cds_id =~ s/_FGP/_FGT/;
-				} elsif ( $gene_id=~ m/GRMZM.*_P\d+/ ) {  # Maize GRMZM2G001048_P01 GRMZM2G001048_T01
-					$cds_id = $gene_id; $cds_id =~ s/_P/_T/;
-				} elsif ( $gene_id =~ m/PGSC\d+DMP\d+/) { # potato
-					$cds_id = $potato_protein_trans_hash{$gene_id};
-				} elsif ( $gene_id =~ m/GSMUA_Achr/) {    # Banana  GSMUA_Achr10P00010_001  GSMUA_Achr10T00010_001
-					$cds_id = $gene_id; $cds_id =~ s/P/T/;
-				} else {
-					die "$gene_id\n";
-				}
-				unless (defined $gene_cds{$cds_id}) { die "Error, do not find CDS of $cds_id\n"; }
-				$protein_cds_ID{$gene_id} = $cds_id;
-				print $dfh3 ">".$gene_id."\t".$family." ".$pk_desc{$family}."\n".$gene_cds{$cds_id}."\n";
-			}
-=cut
-
 			print $dfh6 $protein_id."\t".$family."\t".$pk_desc{$family}."\n";
 		}
 		else 
 		{
 			print $dfh1 ">".$protein_id."\t".$family."\n".$protein_seq{$protein_id}."\n";
 			print $dfh2 ">".$transcript_id."\t".$family."\n".$transcript_seq{$transcript_id}."\n";
-=cut
-			if (defined $gene_cds{$gene_id}) {
-				$protein_cds_ID{$gene_id} = $gene_id;
-                                print $dfh1 ">".$gene_id."\t".$family."\n".$gene_cds{$gene_id}."\n";
-                        } else {
-				#################################
-				# Poirnt A                      #
-				#################################
-				# convert CDS ID to protein ID  #
-				#################################
-				my $cds_id;
-                                if ( $gene_id=~ m/_FGP/ ) {		  # Maize AC195959.2_FGP004  AC195959.2_FGT004
-                                        $cds_id = $gene_id; $cds_id =~ s/_FGP/_FGT/;	
-                                } elsif ( $gene_id=~ m/GRMZM.*_P\d+/ ) {  # Maize GRMZM2G001048_P01 GRMZM2G001048_T01
-                                       	$cds_id = $gene_id; $cds_id =~ s/_P/_T/;
-                                } elsif ( $gene_id =~ m/PGSC\d+DMP\d+/) { # potato
-					$cds_id = $potato_protein_trans_hash{$gene_id};
-				} elsif ( $gene_id =~ m/GSMUA_Achr/) {    # Banana  GSMUA_Achr10P00010_001  GSMUA_Achr10T00010_001
-					$cds_id = $gene_id; $cds_id =~ s/P/T/;
-                                } else {
-                                        die "$gene_id\n";
-                                }
-				unless (defined $gene_cds{$cds_id}) { die "Error, do not find CDS of $cds_id\n"; }
-				$protein_cds_ID{$gene_id} = $cds_id;
-				print $dfh1 ">".$gene_id."\t".$family."\n".$gene_cds{$cds_id}."\n";
-                        }
-=cut
 			print $dfh5 $protein_id."\t".$family."\n";
 		}
 	}
@@ -579,7 +506,7 @@ foreach my $cotyledon (sort keys %itak_obj)
 # generate files for blast					
 #================================================================
 mkdir("for_blast");
-my ($blast_TFs_pep, $blast_TFs_cds, $blast_PKs_pep, $blast_PKs_cds) = (
+my ($blast_TFs_cds, $blast_TFs_pep, $blast_PKs_cds, $blast_PKs_pep) = (
         "for_blast/All_TFs_TRs_nucleotide",
         "for_blast/All_TFs_TRs_protein",
         "for_blast/All_PKs_nucleotide",
@@ -697,6 +624,11 @@ print "load data local infile \"protein_family_table\" into table gene_family;\n
 #================================================================
 # kentnf: subroutine						
 #================================================================
+=head1
+
+ parse_seq_for_blast
+
+=cut
 sub parse_seq_for_blast
 {
 	my ($in_file, $out_file) = @_;
@@ -712,6 +644,57 @@ sub parse_seq_for_blast
 	$out->close;
 }
 
+=head1 
+
+ cluster
+
+=cut
+sub cluster
+{
+	my $protein_seq = shift;
+
+	my $seq_num;
+	my $in = Bio::SeqIO->new(-format=>'fasta', -file=>$protein_seq);
+	while(my $inseq = $in->next_seq) { $seq_num++; }
+
+	my $nwk_file = $protein_seq; $nwk_file =~ s/\.pep/\.nwk/;
+	my $aln_file = $protein_seq; $aln_file =~ s/\.pep/\.aln/;
+	my $phb_file = $protein_seq;
+
+	if ( $seq_num >= 3 )
+	{
+		if ( $seq_num > 3 )
+		{
+			unless ( -s $nwk_file )
+			{
+				$phb_file =~ s/\.pep/\.phb/;
+				my $cmd1 = "$clustalw2_program -INFILE=$protein_seq -ALIGN";
+				my $cmd2 = "$clustalw2_program -INFILE=$protein_seq -PROFILE1=$aln_file -BOOTSTRAP=100";
+				system($cmd1) && die "Error in command $cmd1\n";
+                                system($cmd2) && die "Error in command $cmd2\n";
+                                unless (-s $phb_file) { die "Error, do not have phb file $phb_file\n"; }
+                                phb2nwk($phb_file, $nwk_file);
+			}
+		}
+		else
+		{
+			unless ( -s $nwk_file )
+			{
+				$phb_file =~ s/\.pep/\.ph/;
+				my $cmd1 = "$clustalw2_program -INFILE=$protein_seq -TREE";
+				system($cmd1) && die "Error in command $cmd1\n";
+				unless (-s $phb_file) { die "Error, do not have phb file $phb_file\n"; }
+				phb2nwk($phb_file, $nwk_file);
+			}
+		}
+	}
+}
+
+=head1
+
+ phb2nwk -- convert phb/ph format to nwk format
+
+=cut
 sub phb2nwk
 {
         my ($phb, $nwk) = @_;
