@@ -723,8 +723,6 @@ sub phb2nwk
                 }
         }
 
-        print $fh_nwk $_;
-
         $fh_phb->close;
         $fh_nwk->close;
 }

@@ -95,7 +95,7 @@ Pipeline For update iTAK Databse
      2. upload protein sequence to codequest Server
 
      3. parse the blast result:
-     		$perl  iTAK_DB_parse_blast.pl  blast_results
+     		$perl  iTAK_DB_parse_blast.pl  blast_results  > update_protein_annotation_version
      		* the output file is protein_annotation_table file for importing to database
 
 ### F. Upload files to server
@@ -112,15 +112,25 @@ Pipeline For update iTAK Databse
      LOAD DATA LOCAL INFILE 'family_summary' INTO TABLE `family` FIELDS TERMINATED BY '\t' ESCAPED BY '\\' LINES TERMINATED BY '\n';
 
      Here is the command for importing each table:
+		mysql> truncate table itak.category;
 		mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/category" into table itak.categroy;
-		mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/gene_table" into table itak.gene;
-		mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/family_summary" into table itak.family_summary;
-		mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/protein_domain_table" into table itak.gene_domain;
-		mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/protein_family_table" into table itak.gene_family;
-		mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/protein_annotation" into table itak.gene_annotation;
 
-     Problem: some genes assigned to both PKs and TFs families:
-     /home/kentnf/project/itak/itak_database/for_blast/combine_family.
+		mysql> truncate table itak.gene;
+		mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/gene_table" into table itak.gene;
+
+		mysql> truncate table itak.family_summary;
+		mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/family_summary" into table itak.family_summary;
+
+		mysql> truncate table itak.gene_domain;
+		mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/protein_domain_table" into table itak.gene_domain;
+
+		mysql> truncate table itak.gene_family;
+		mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/protein_family_table" into table itak.gene_family;
+
+		** mysql> truncate table itak.gene_annotation; (do not need truncate this table)
+		mysql> load data local infile "/var/www/cgi-bin/itak/mysql_database/versionN/update_protein_annotation_version" into table itak.gene_annotation;
+
+     Problem: some genes assigned to both PKs and TFs families: please check gene_family table
 
 ### H. Format the database
 
@@ -129,6 +139,12 @@ Pipeline For update iTAK Databse
      $formatdb -i All_PKs_protein -p T
      $formatdb -i All_TFs_TRs_nucleotide -p F
      $formatdb -i All_TFs_TRs_protein -p T
+
+### G. Update webpage
+
+     1. db_home.cgi
+		add plant info to data hash
+		add plant name to tree base on http://genomevolution.org/wiki/index.php/Sequenced_plant_genomes
 
 Ref: Generate and Draw phylogenetic tree automatically   
 ------------------------------------------------------
