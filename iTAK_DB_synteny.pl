@@ -17,10 +17,15 @@ my $usage = qq'
 usage : $0 -i list
 
   * the format of list file: 
-  1) protein sequence
+  1) file prefix
   2) cotyledon ( monocotyledon, dicotyledon, non-angiosperms )
   3) species
-  4) id type
+
+  * input files base on file prefix
+  1) proteins
+  2) CDS
+  3) transcript gene file
+  4) iTAK output
 
   * the prefix is for below files
   0) prefix_pep (get prefix from input protein sequence)
@@ -49,25 +54,34 @@ die $usage unless $list;
 #================================================================
 # check the list file
 #================================================================
+my %species;
+
 my $cfh = IO::File->new($list) || die "Can not open list file $list $!\n";
 while(<$cfh>)
 {
 	chomp; 
 	if ($_ =~ m/^#/) { next; }
 
-	my ($pep_file, $cotyledon, $species, $id_type, $ref_prefix, $ref_block, $prefix, $chrSize, $gene_position, $block, $trans_gene_file, $pk_cat, $tf_cat);
+	my ($ipath, $cotyledon, $species, 
+	    $pep_file, $trans_gene_file, $pk_cat, $tf_cat,
+	    $block, $chrSize, $gene_position,
+	    $ref_prefix, $ref_block);
 
 	my @a = split(/\t/, $_);
-
-	if ( scalar(@a) == 4 )		{ ($pep_file, $cotyledon, $species, $id_type) = @a; }
-	elsif ( scalar(@a) == 6 ) 	{ ($pep_file, $cotyledon, $species, $id_type, $ref_prefix, $ref_block) = @a; } 
+	if ( scalar(@a) == 3 )		{ ($ipath, $cotyledon, $species) = @a; }
+	elsif ( scalar(@a) == 5 ) 	{ ($ipath, $cotyledon, $species, $ref_prefix, $ref_block) = @a; } 
 	else 				{  die "Error in list file $_ \n"; } 
 
-	$prefix = $pep_file; $prefix =~ s/_pep$//;
-	$chrSize = $prefix."_chrSize";
-	$gene_position = $prefix."_gene_position";
-	$block = $prefix."_block.csv";
-	$trans_gene_file = $prefix."_trans_gene";
+	# species to hash and check the repeat species
+	if (defined $species{$species}) { die "Error, repeat species $species\n"; } else { $species{$species} = 1;}
+
+	# set files
+	my ($prefix,$rpath,$rsuffix) = fileparse($ipath);
+	$pep_file 	= $ipath."/".$prefix."_pep";
+	$trans_gene_file= $ipath."/".$prefix."_trans_gene";
+	$chrSize 	= $ipath."/".$prefix."_chrSize";
+	$gene_position 	= $ipath."/".$prefix."_gene_position";
+	$block 		= $ipath."/".$prefix."_block";
 
 	# set iTAK output files
 	# output folder is: TAIR9_protein_output
@@ -87,10 +101,6 @@ while(<$cfh>)
 	if ($ref_block) {
 		unless (-s $ref_block) { die "Error! File reference block $ref_block do not exist $!\n"; }
 	}
-
-	# check ID type
-	if ($id_type eq "gene" || $id_type eq "mRNA") {}
-	else { die "Error in id type: $id_type for $_\n"; }
 }
 $cfh->close;
 
@@ -120,19 +130,26 @@ while(<$fh>)
 	chomp;
 	if ($_ =~ m/^#/) { next; }
 
-	my ($pep_file, $cotyledon, $species, $id_type, $ref_prefix, $ref_block, $prefix, $chrSize, $gene_position, $block, $trans_gene_file, $pk_cat, $tf_cat);
+	my ($ipath, $cotyledon, $species,
+	    $pep_file, $trans_gene_file, $pk_cat, $tf_cat,
+	    $block, $chrSize, $gene_position,
+	    $ref_prefix, $ref_block);
 
 	my @a = split(/\t/, $_);
-
-	if ( scalar(@a) == 4 )          { ($pep_file, $cotyledon, $species, $id_type) = @a; }
-	elsif ( scalar(@a) == 6 )       { ($pep_file, $cotyledon, $species, $id_type, $ref_prefix, $ref_block) = @a; }
+	if ( scalar(@a) == 3 )          { ($ipath, $cotyledon, $species) = @a; }
+	elsif ( scalar(@a) == 5 )       { ($ipath, $cotyledon, $species, $ref_prefix, $ref_block) = @a; }
 	else                            {  die "Error in list file $_ \n"; }
 
-	$prefix = $pep_file; $prefix =~ s/_pep$//;
-	$chrSize = $prefix."_chrSize";
-	$gene_position = $prefix."_gene_position";
-	$block = $prefix."_block.csv";
-	$trans_gene_file = $prefix."_trans_gene";
+	# species to hash and check the repeat species
+	if (defined $species{$species}) { die "Error, repeat species $species\n"; } else { $species{$species} = 1;}
+
+	# set files
+	my ($prefix,$rpath,$rsuffix) = fileparse($ipath);
+	$pep_file       = $ipath."/".$prefix."_pep";
+	$trans_gene_file= $ipath."/".$prefix."_trans_gene";
+	$chrSize        = $ipath."/".$prefix."_chrSize";
+	$gene_position  = $ipath."/".$prefix."_gene_position";
+	$block          = $ipath."/".$prefix."_block";
 
 	# set iTAK output file
 	# output folder is: TAIR9_protein_output
@@ -143,7 +160,6 @@ while(<$fh>)
         $pk_cat = $folder."/".$fname."_pkcat";
         $tf_cat = $folder."/".$fname."_tf_family";
 
-	$prefix_id_type{$prefix} = $id_type;
 	$prefix_species{$prefix} = $species;
 	$prefix_chrSize{$prefix} = $chrSize;
 	$prefix_gene_position{$prefix} = $gene_position;
@@ -225,21 +241,6 @@ while(<$fh>)
 }
 $fh->close;
 
-#===============================================================#
-# PKs ID and Description to hash				#
-#===============================================================#
-my $pk_desc_file = ${FindBin::RealBin}."/protein_kinase_family";
-unless (-s $pk_desc_file) { die "Can not locate protein_kinase_family file\n"; }
-my %pk_desc;	# key: PKsID, value:desc;
-my $kfh = IO::File->new($pk_desc_file) || die "Can not open file $pk_desc_file $!\n";
-while(<$kfh>)
-{
-	chomp;
-	my @a = split(/\t/, $_);
-	$pk_desc{$a[0]} = $a[1];
-}
-$kfh->close;
-
 #================================================================
 # prepare files for synteny
 #================================================================
@@ -250,8 +251,7 @@ foreach my $cotyledon (sort keys %itak_obj)
 	foreach my $prefix (sort keys %{$itak_obj{$cotyledon}})
 	{
 		# get files for plant synteny 
-		my ($id_type, $chrSize, $gene_position, $block);
-		$id_type = $prefix_id_type{$prefix};
+		my ($chrSize, $gene_position, $block);
 		$chrSize = $prefix_chrSize{$prefix};
 		$gene_position = $prefix_gene_position{$prefix}; 
 		$block = $prefix_block{$prefix};
@@ -282,7 +282,6 @@ foreach my $cotyledon (sort keys %itak_obj)
 				$trans_id = $protein_trans{$protein_id};
 				$uniq_trans{$trans_id} = 1;
 
-
 				$gene_id = $trans_gene{$trans_id};
 				$uniq_gene{$gene_id} = 1;
 			}
@@ -296,20 +295,7 @@ foreach my $cotyledon (sort keys %itak_obj)
                         my $syn_cmd = "";
                         my $gene_family_list = "for_synteny/".$sp."_".$fm;
                         my $fh3 = IO::File->new(">".$gene_family_list) || die "Can not open gene family list file $gene_family_list $!\n";
-
-			if ($id_type eq "gene") 
-			{
-                        	foreach my $id (sort keys %uniq_gene) { print $fh3 "$id\t$id\n"; }
-			}
-			elsif ($id_type eq "protein") 
-			{
-				foreach my $id (sort keys %uniq_protein) { print $fh3 "$id\t$id\n"; }
-			}
-			elsif ($id_type eq "mRNA")
-			{
-				foreach my $id (sort keys %uniq_trans) { print $fh3 "$id\t$id\n"; }
-			}
-
+                        foreach my $id (sort keys %uniq_gene) { print $fh3 "$id\t$id\n"; }
                         $fh3->close;
 
                         if ( defined $prefix_ref{$prefix} ) {
@@ -328,5 +314,3 @@ foreach my $cotyledon (sort keys %itak_obj)
 #================================================================
 # kentnf: subroutine						
 #================================================================
-
-

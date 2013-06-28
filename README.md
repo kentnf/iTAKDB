@@ -11,26 +11,40 @@ Pipeline For update iTAK Databse
 
      *Important*
      After that, please add Rice and Arabidopsis output to your folder for making clusters. 
+     For some species, using PACid is better than using original transcript ID
 
 ### B. Create a list for plant peptide and CDS sequences. The format of the list is like below:
 
      Each line include five columns, they are:
-		A: peptide sequence
-		B: monocotyledon dicotyledon
+		A: folder for species (rice)
+		B: monocotyledon / dicotyledon / non-angiosperms
 		C: Name of plant species
-		D: CDS sequence
-		E: protein & transcirpt & gene file
-		F: gene position file
-		G: chr Size file
+
+     The protein, CDS and other files are named according to A: folder for species
+		A: CDS sequence				-- rice_cds
+		B: protein				-- rice_pep
+		C: representive protein			-- rice_rep_pep (optional)
+		D: protein & transcirpt & gene file	-- rice_trans_gene
+		E: gene position file			-- rice_gene_position (optional)
+		F: chr Size file			-- rice_chrSize (optional)
+		G: block file				-- rice_block (optional)
+		H: Other block file			-- rice_other_block (optional)
 
      Example:
-		A: publishedPlantGenome/apple_pep  
-		B: dicotyledon     
-		C: Apple   
-		D: publishedPlantGenome/apple_cds   
-		E: publishedPlantGenome/apple_trans_gene
-		F: publishedPlantGenome/apple_gene_position
-		G: publishedPlantGenome/apple_chrSize
+		A: publishedPlantGenome/rice  
+		B: monocotyledon     
+		C: Rice   
+
+		Below info do not have order
+		A: publishedPlantGenome/rice/rice_cds
+		B: publishedPlantGenome/rice/rice_pep
+		C: publishedPlantGenome/rice/rice_rep_pep
+		D: publishedPlantGenome/rice/rice_trans_gene
+		E: publishedPlantGenome/rice/rice_gene_position	
+		F: publishedPlantGenome/rice/rice_chrSize
+		G: publishedPlantGenome/rice/rice_block
+		H: publishedPlantGenome/rice/rice_other_block
+		* other in H should be name of other species
 
      Each line of protein & transcirpt & gene file include three columns:
 		A: protein ID
@@ -46,8 +60,9 @@ Pipeline For update iTAK Databse
 
      Each line of chr Size file
 		A: chrID
-		B: length
-		C: color
+		B: chrName
+		C: length
+		D: color
 
 ### C. run iTAK.
 

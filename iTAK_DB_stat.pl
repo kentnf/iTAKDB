@@ -283,21 +283,6 @@ while(<$fh>)
 }
 $fh->close;
 
-#===============================================================#
-# PKs ID and Description to hash				#
-#===============================================================#
-my $pk_desc_file = ${FindBin::RealBin}."/protein_kinase_family";
-unless (-s $pk_desc_file) { die "Can not locate protein_kinase_family file\n"; }
-my %pk_desc;	# key: PKsID, value:desc;
-my $kfh = IO::File->new($pk_desc_file) || die "Can not open file $pk_desc_file $!\n";
-while(<$kfh>)
-{
-	chomp;
-	my @a = split(/\t/, $_);
-	$pk_desc{$a[0]} = $a[1];
-}
-$kfh->close;
-
 #================================================================
 # prepare files for cluster / trees
 #================================================================
