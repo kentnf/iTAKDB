@@ -20,8 +20,8 @@ if ($num < 1) { die "Error in num: $num\n"; }
 my $in = Bio::SeqIO->new(-format=>'fasta', -file=>$file);
 while(my $inseq = $in->next_seq)
 {
-        print $inseq->id,"\n";
-        print $inseq->desc,"\n";
+        #print $inseq->id,"\n";
+        #print $inseq->desc,"\n";
 
 	my @ids = split(/\|/, $inseq->id);
 	my $id = $ids[$num-1];

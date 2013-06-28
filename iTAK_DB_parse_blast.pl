@@ -11,7 +11,14 @@ use warnings;
 use Bio::SearchIO;
 use Getopt::Long;
 
-my $usage = "\nusage: $0 blast_result > output\n\n";
+my $usage = qq'
+usage: $0 blast_result > output
+
+* the output is the top 5 blast hits for each blast results
+* format of output file
+  query_name \\t hit_name \\t hit_description \\t score \\t significance 
+
+';
 my $input_file = shift || die $usage;
 
 my $max_hit_num ||= 5;

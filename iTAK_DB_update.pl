@@ -17,11 +17,15 @@ my $usage = qq'
 usage : $0 -i list
 
   * the format of list file: 
-  1) protein sequence
+  1) file prefix
   2) cotyledon ( monocotyledon, dicotyledon, non-angiosperms )
   3) species
-  4) transcript sequences
-  5) transcript gene file
+
+  * input files base on file prefix
+  1) proteins
+  2) CDS
+  3) transcript gene file
+  4) iTAK output 
 
   * the format of transcript gene file
   1) protein id
@@ -50,9 +54,9 @@ while(<$cfh>)
 {
 	chomp; 
 	if ($_ =~ m/^#/) { next; }
-	my ($pep_file, $cotyledon, $species, $cds_file, $trans_gene_file, $pk_aln, $pk_cat, $pk_seq, $tf_aln, $tf_cat, $tf_seq);
-	($pep_file, $cotyledon, $species, $cds_file, $trans_gene_file) = split(/\t/, $_);
-
+	my ($ipath, $pep_file, $cotyledon, $species, $cds_file, $trans_gene_file, $pk_aln, $pk_cat, $pk_seq, $tf_aln, $tf_cat, $tf_seq);
+	($ipath, $cotyledon, $species) = split(/\t/, $_);
+	
 	# check cotyledon
 	if ($cotyledon eq "monocotyledon" ) 		{ $has_monocotyledon = 1; }
 	elsif ( $cotyledon eq "dicotyledon" ) 		{ $has_dicotyledon = 1; }
@@ -66,6 +70,11 @@ while(<$cfh>)
 	# output folder is: TAIR9_protein_output
 	# output files are: TAIR9_protein_pkaln, TAIR9_protein_pkcat, TAIR9_protein_pkseq
 	#                   TAIR9_protein_tf_align, TAIR9_protein_tf_family, TAIR9_protein_tf_seq
+	my ($prefix,$rpath,$rsuffix) = fileparse($ipath);
+	$pep_file = $ipath."/".$prefix."_pep";
+	$cds_file = $ipath."/".$prefix."_cds";
+	$trans_gene_file = $ipath."/".$prefix."_trans_gene";
+
 	my $folder = $pep_file."_output";
 	my ($fname,$fpath,$fsuffix) = fileparse($pep_file);
 	$pk_aln = $folder."/".$fname."_pkaln";
@@ -127,13 +136,18 @@ while(<$fh>)
 	if ($_ =~ m/^#/) { next; }
 
 	# set input files
-	my ($pep_file, $cotyledon, $species, $cds_file, $trans_gene_file, $pk_aln, $pk_cat, $pk_seq, $tf_aln, $tf_cat, $tf_seq);
-	($pep_file, $cotyledon, $species, $cds_file, $trans_gene_file) = split(/\t/, $_);
+	my ($ipath, $pep_file, $cotyledon, $species, $cds_file, $trans_gene_file, $pk_aln, $pk_cat, $pk_seq, $tf_aln, $tf_cat, $tf_seq);
+	($ipath, $cotyledon, $species) = split(/\t/, $_);
 
 	# set iTAK output file
 	# output folder is: TAIR9_protein_output
 	# output files are: TAIR9_protein_pkaln, TAIR9_protein_pkcat, TAIR9_protein_pkseq
 	#                   TAIR9_protein_tf_align, TAIR9_protein_tf_family, TAIR9_protein_tf_seq
+	my ($prefix,$rpath,$rsuffix) = fileparse($ipath);
+	$pep_file = $ipath."/".$prefix."_pep";
+	$cds_file = $ipath."/".$prefix."_cds";
+	$trans_gene_file = $ipath."/".$prefix."_trans_gene";
+
 	my $folder = $pep_file."_output";
         my ($fname,$fpath,$fsuffix) = fileparse($pep_file);
         $pk_aln = $folder."/".$fname."_pkaln";
@@ -326,8 +340,13 @@ foreach my $cotyledon (sort keys %itak_obj)
 				$main_gene{$main_gene_id} = 1;
 			}
 
-			if ($cotyledon eq "dicotyledon") {
-				if ($species ne "Arabidopsis") {
+			#unless (defined $species_anno{$species}) || die "Can not find gene annotation file for $species \n";
+			#my $gene_annotation = $species_anno{$species};
+
+			if ($cotyledon eq "dicotyledon") 
+			{
+				if ($species ne "Arabidopsis") 
+				{
 					if ( defined $itak_obj{"dicotyledon"}{"Arabidopsis"}{$family} )
 					{
 						my @di_proteins = split(/\t/, $itak_obj{"dicotyledon"}{"Arabidopsis"}{$family});
@@ -337,7 +356,13 @@ foreach my $cotyledon (sort keys %itak_obj)
 						}
 					}
 				}
-			} elsif ( $cotyledon eq "monocotyledon") {
+				else
+				{
+					
+				}
+			} 
+			elsif ( $cotyledon eq "monocotyledon") 
+			{
 				if ($species ne "Rice") {
 					if ( defined $itak_obj{"monocotyledon"}{"Rice"}{$family} )
 					{

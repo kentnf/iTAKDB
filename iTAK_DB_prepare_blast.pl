@@ -8,6 +8,10 @@ use IO::File;
 my $usage = qq'
 usage: $0  previous_TFs_seq  previous_PKs_seq  new_TF_seq  new_PK_seq
 
+* the output file is Prepared_Protein.fa, it includes proteins in 
+  new_TF_seq and new_PK_seq, but excludes proteins in previous_TFs_seq
+  and previous_PKs_seq.
+
 ';
 
 my $preTFs = shift || die $usage;

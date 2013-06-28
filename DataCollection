@@ -1,0 +1,685 @@
+
+### apple
+	Download: http://www.phytozome.net/apple.php
+	Protein: Mdomestica_196_protein.fa.gz	-- apple_pep
+	CDS: Mdomestica_196_cds.fa.gz		-- apple_cds
+	Gene annotation: Mdomestica_196_gene.gff3.gz
+	PrimaryProtein: Mdomestica_196_protein_primaryTranscriptOnly.fa.gz -- apple_rep_pep
+
+	* Information
+	Genome The main genome assembly is approximately 881.3 Mb arranged in 122,107 scaffolds
+	       Approximately 870.9 Mb arranged in 150,821 contigs (~ 1.2 % gap)
+
+	Loci 26,374 total loci containing protein-coding transcripts
+	Alternative Transcripts 4,347 total alternatively spliced transcripts
+
+	Loci 63,538 genes. 
+	     63,541 transcripts, where transcripts whose CDS overlap on the same strand are grouped into genes 
+	
+	* Real Data
+	Loci 63514
+	transcripts 63517
+
+	* 0 genes can not pass overlap checking
+
+### arabidopsis lyrata
+	Download: http://www.phytozome.net/alyrata.php
+	Protein: Alyrata_107_protein.fa.gz	-- arabidopsis_lyrata_pep
+	CDS: Alyrata_107_cds.fa.gz		-- arabidopsis_lyrata_cds
+	Gene annotation: Alyrata_107_gene.gff3.gz
+	PrimaryProtein: Alyrata_107_protein_primaryTranscriptOnly.fa.gz -- arabidopsis_lyrata_rep_pep
+
+	* Information
+	This release of Phytozome includes JGI release v1.0 of the Arabidopsis lyrata genome.
+	Genome Approximately 207Mb arranged in 3648 scaffolds 
+	Transcripts 32670 protein-coding transcripts 
+
+	* 42 genes can not pass overlap checking
+
+### banana
+	Download: http://banana-genome.cirad.fr/home
+	Protein: musa_pep.faa.gz		-- banana_pep
+	CDS: musa_cds.fna.gz 			-- banana_cds
+	Gene annotation: musa.gff3.gz
+	PrimaryProtein: NA
+
+	* Information
+	We assembled 91% of the 523Mb genome of Pahang (1C estimated through flow cytometry, 2n=22) 
+	predicted 36,542 protein-coding genes and anchored them to the 11 Musa chromosomes
+
+	* Real Data
+	banana_pep banana_cds 36549
+	Gene number : 37604  mRNA : 36550  tRNA : 819  miRNA : 235
+	
+	* uniq_21_seqID , only present in sequence file, 
+	* the 21 sequence do not in iTAK results, so we can delete it
+	* After delete the 21 sequences from banana_pep and banana_cds, only 36528 sequences were feed into iTAK
+
+> GSMUA_Achr10T07110_001	chr10:17,358,716..17,358,898	+
+> GSMUA_Achr10T07170_001	chr10:17,454,792..17,454,971	+
+> GSMUA_Achr10T24930_001	chr10:29,144,450..29,146,102	-
+> GSMUA_Achr3T27800_001	chr3:27,296,792..27,297,067	+
+> GSMUA_Achr3T30230_001	chr3:29,049,581..29,055,444	-
+> GSMUA_Achr4T10980_001	chr4:7,923,596..7,923,700	+
+> GSMUA_Achr4T22690_001	chr4:22,945,228..22,946,072	+
+> GSMUA_Achr4T22880_001	chr4:23,154,600..23,155,588	-
+> GSMUA_Achr5T21520_001
+> GSMUA_Achr5T21530_001
+> GSMUA_Achr5T21550_001
+> GSMUA_Achr6T24120_001
+> GSMUA_Achr6T24130_001
+> GSMUA_Achr7T08780_001	chr7:7159337..7160368	-
+> GSMUA_Achr7T08790_001
+> GSMUA_Achr7T21410_001
+> GSMUA_Achr8T29520_001
+> GSMUA_Achr9T12810_001
+> GSMUA_Achr9T15670_001
+> GSMUA_Achr9T23410_001
+> GSMUA_Achr9T23420_001
+
+	* uniq_22_mRNAID , only present in GFF file
+< Achr8T31213
+< GSMUA_Achr10T25485_001
+< GSMUA_Achr10T26245_001
+< GSMUA_Achr11T01280_001
+< GSMUA_Achr11T18245_001
+< GSMUA_Achr1T21193_001
+< GSMUA_Achr2T19205_001
+< GSMUA_Achr4T10972_001
+< GSMUA_Achr4T11615_001
+< GSMUA_Achr4T3795_001
+< GSMUA_Achr5T07755_001
+< GSMUA_Achr6T08945_001
+< GSMUA_Achr6T28335_001
+< GSMUA_Achr6T36684_001
+< GSMUA_Achr7T14898_001
+< GSMUA_Achr8T02397_001
+< GSMUA_Achr8T05642_001
+< GSMUA_Achr8T25505_001
+< GSMUA_Achr9T00513_001
+< GSMUA_Achr9T00517_001
+< GSMUA_Achr9T23415_001
+< GSMUA_Achr9T24915_001
+
+### barley (not finished Using High Conf genes, can not find genome sequence)
+	Download: ftp://ftpmips.helmholtz-muenchen.de/plants/barley/public_data/genes/
+	Protein: 
+		barley_HighConf_genes_MIPS_23Mar12_ProteinSeq.fa	-- barley_pep
+		barley_LowConf_genes_MIPS_23Mar12_ProteinSeq.fa		-- barley_pep
+	CDS: 
+		barley_HighConf_genes_MIPS_23Mar12_CDSSeq.fa		-- barley_cds
+		barley_LowConf_genes_MIPS_23Mar12_CDSSeq.fa		-- barley_cds
+	Gene annotation: 
+		barley_HighConf_genes_MIPS_21Aug12_Transcript_and_CDS_structure.gff
+		
+	PrimaryProtein: NA
+
+	* Real Data
+	barley_pep cds HighConf 26159
+	barley_pep cds LowConf  53220
+			All	79379
+
+	predicted gene : 24243
+	mRNA : 62426
+
+
+
+
+### brachypodium 
+	Download: http://www.phytozome.net/brachy.php
+	protein: Bdistachyon_192_protein.fa.gz			-- brachypodium_pep
+	CDS: Bdistachyon_192_cds.fa.gz				-- brachypodium_cds
+	Gene annotation: Bdistachyon_192_gene.gff3.gz
+	PrimaryProtein: Bdistachyon_192_protein_primaryTranscriptOnly.fa.gz -- brachypodium_rep_pep
+
+	* Information:
+	Genome Approximately 272Mb arranged in 5 chromosomes and 78 unmapped scaffolds. (99.6% of all sequence is contained in the 5 chromosome assemblies.) 
+	Loci 26,552 loci containing protein-coding transcripts 
+	Transcripts 31,029 protein-coding transcripts 
+
+	* 686 genes can not pass overlap checking
+
+### brapa (not pub in phytozome, but in  BRAD: Brassica Database )
+	Download: http://www.phytozome.net/napacabbage.php	
+	protein: Brapa_197_protein.fa.gz			-- brapa_pep
+	CDS: Brapa_197_cds.fa.gz				-- brapa_cds
+	Gene annotation: Brapa_197_gene.gff3.gz
+	PrimaryProtein: Brapa_197_protein_primaryTranscriptOnly.fa.gz -- brapa_rep_pep
+
+	* Information
+	Genome  The main genome assembly is approximately 283.8 Mb arranged in 40,367 scaffolds
+		Approximately 273.1 Mb arranged in 50,316 contigs (~ 3.8 % gap)
+	Loci	26,374 total loci containing protein-coding transcripts
+	Alternative Transcripts 4,347 total alternatively spliced transcripts
+	Loci	63,538 genes. 63,541 transcripts, where transcripts whose CDS overlap on the same strand are grouped into genes 
+
+	* Real Data
+        Gene 40905
+        PrimaryProtein 40905
+        Transcripts 41019
+	
+	* 10 genes can not pass overlap checking
+
+### cacao 
+	Download: http://cocoagendb.cirad.fr/gbrowse/download.html
+	* cacao cacaogenomedb_JGI unpublished (genome biology)
+
+	protein: Theobroma_cacao_v1.pep.faa.gz
+	CDS: Theobroma_cacao_v1.cds.fna.gz
+	Gene annotation: Theobroma_cacao_v1.gff3.gz
+
+	* Real Dataset 
+	Gene 46140 (GFF file) 46143 (sequence file)
+	Three genes not in GFF file Tc00_g053610, Tc00_g058430, Tc07_g017570
+
+	* After removing 17342 transposable_element_gene
+	Gene 28798
+	PrimaryProtein 28798
+	Transcript 28798
+
+	* 0 genes can not pass overlap checking
+
+### castor_bean
+	Download: http://www.phytozome.net/ricinus.php
+	protein: Rcommunis_119_protein.fa.gz		-- castor_bean_pep
+	CDS: Rcommunis_119_cds.fa.gz			-- castor_bean_pep
+	Gene annotation: Rcommunis_119_gene.gff3.gz
+	PrimaryProtein: Rcommunis_119_protein_primaryTranscriptOnly.fa.gz -- castor_bean_rep_pep
+
+	* Information
+	This release of Phytozome includes TIGR/JCVI release v0.1 of the Ricinus communis genome and annotation
+	Genome Approximately 400 Mb arranged in 25878 scaffolds 
+	Transcripts 31221 protein-coding transcripts 
+
+	* 0 genes can not pass overlap checking
+
+### chickpea
+	Download: http://www.icrisat.org/gt-bt/ICGGC/genomedata.zip
+	protein: Cicer_arietinum_GA_v1.0.gene.pep.fa 	-- chickpea_pep 
+	CDS: Cicer_arietinum_GA_v1.0.gene.cds.fa	-- chickpea_cds
+	Gene annotation: Cicer_arietinum_GA_v1.0.gene.gff
+	PrimaryProtein: Cicer_arietinum_GA_v1.0.gene.pep.fa -- chickpea_rep_pep
+
+	* Real Dataset
+	28269 transcript, no genes label in GFF file
+
+	* 0 genes can not pass overlap checking
+
+### chlamydomonas_reinhardtii
+	Download: http://www.phytozome.net/chlamy.php
+	protein: Creinhardtii_236_protein.fa.gz		-- chlamydomonas_reinhardtii_pep
+	CDS: Creinhardtii_236_cds.fa.gz			-- chlamydomonas_reinhardtii_cds
+	Gene annotation: Creinhardtii_236_gene.gff3.gz
+	PrimaryProtein: Creinhardtii_236_protein_primaryTranscriptOnly.fa.gz -- chlamydomonas_reinhardtii_rep_pep
+
+	* Information
+================================================================
+Overview
+This release of Chlamydomonas genomic information features v5.3.1 of Chlamydomonas annotations, which are based on the Augustus update u11.6 (u11.6) annotation of JGI assembly v5. This annotation includes prediction of alternative transcripts for the first time.
+
+Genome Assembly
+Approximately 111 Mb arranged in 17 linkage groups (chromosomes) with 37 additional unmapped scaffolds, with an L50 of 7.8 Mb.
+
+Gene Prediction
+This set of gene predictions incorporates new JGI gene expression data from 1M reads generated from nitrogen-starved cells on the 454 Titatnium platform as well as 239M 2x150 stranded Illumina reads and other smaller RNA-Seq datasets. These reads are in the process of being deposited in the GenBank Sequence Read Archive (SRA).
+
+The underlying gene prediction was performed by Mario Stanke using Augustus (annotation version u11.6). We removed 5 transcripts that were shorter than 25 aa; 59 with internal stop codons and 716 with homology (over >=30% of their length) to Transposable Elements deposited in RebBase. Manual examination merged or split loci where updated gene predictions were incompatible with older annotations. This left 17,737 loci (of which 1,789 encode alternate transcripts) making a total of 19,526 protein-coding transcripts
+
+12,264 stable gene (13,450 stable transcript) identifiers were mapped forwards from v4; 9,424 deflines, descriptions and gene symbols (e.g. IFT27) were mapped. (Stable gene identifiers are of the form Cre01.g123450 for locus; Cre01.g123450.t2.1 for transcripts, where Cre01 means the locus is on chromosome 1 and gene numbers (g123450 in this example) generally increment by 50 starting at the beginning of chromosome 1. The t2.1 at the end of the transcript identifier indicates this is version 1 of transcript 2 at this locus. Augustus gene identifiers of the form g12345 remain for the transcripts that are still being mapped to a stable locus. All loci will have a stable identifier in the next release.) 
+=================================================================
+	17,737 loci;  19,526 protein-coding transcripts
+
+	* 106 genes can not pass overlap checking
+
+### cotton
+	Download: http://cgp.genomics.org.cn/page/species/index.jsp
+	user: kentnf
+	pass: fangfangtu
+	Download: http://www.cottongen.org/species/Gossypium_raimondii/bgi-cgp_genome_v1.0
+	protein: G.raimondii.pep.fasta.gz		-- cotton_pep
+	CDS: G.raimondii.cds.fasta.gz			-- cotton_cds
+	Gene annotation: G.raimondii_BGI-CGP_v1.0_transcripts.gff3
+	PrimaryProtein: NA (G.raimondii.pep.fasta.gz)
+
+	* Information
+	40976 transcript/proteins
+
+	* 0 genes can not pass overlap checking
+
+### cotton_JGI (do not published)
+	Download: 
+	protein: Graimondii_221_protein.fa.gz 			-- cotton_JGI_pep
+	CDS: Graimondii_221_cds.fa.gz				-- cotton_JGI_pep
+	Gene annotation: Graimondii_221_gene.gff3.gz
+	PrimaryProtein: Graimondii_221_protein_primaryTranscriptOnly.fa.gz -- cotton_JGI_rep_pep
+	
+	* Information
+	Genome
+    Scaffold total: 1,033 
+    Contig total: 19,735 
+    Scaffold sequence total: 761.4 Mb 
+    Contig sequence total: 748.1 Mb ( -> 1.7% gap) 
+    Scaffold N50 (L50) = 6 (62.2 Mb)
+    Contig N50 (L50) = 1,596 (135.6kb)
+    41 scaffolds are > 50kb in size, representing approximately 99.0% of the genome 
+
+	Final gene set has 37,505 protein coding genes and 77,267 protein coding transcripts. 
+
+	* 178 genes can not pass overlap checking
+
+### cucumber ( ask rep protein from hh )
+	Download: icugi.org
+	protein: cucumber_v2.pep.gz 				-- cucumber_pep
+	CDS: cucumber_v2.cds.gz					-- cucumber_cds
+	Gene annotation: cucumber_v2.gff3.gz
+	PrimaryProtein: NA (created using the longest transcript at each loci)	-- cucumber_rep_pep
+			using script convert_pid_selpri.pl
+
+	* Real Dataset
+	Gene: 23248
+	mRNA: 25600
+
+	* 9 genes can not pass overlap checking
+	
+### date_palm ( do not have synteny analysis )
+	Download: http://qatar-weill.cornell.edu/research/datepalmGenome/download.html
+	protein: PDK30-pep.fsa					-- date_palm_pep
+	mRNA: PDK30-mrna.fsa					-- date_palm_cds
+	Gene annotation: PDK30.gbf.gz
+	PrimaryProtein NA
+
+	* Real Dataset
+	proteins 28889
+
+
+### grape
+	Download: http://www.genoscope.cns.fr/externe/GenomeBrowser/Vitis/
+	
+	* Information
+	Genome 487Mb arranged in 19 chromosomes 
+	Loci 26346 loci containing protein-coding transcripts 
+	Transcripts 26346 protein-coding transcripts 
+
+	* 94 genes can not pass overlap checking
+
+### jatropha_curcas ( not finished, do not include this plant species)
+
+### lotus_japonicus 
+	Download: http://www.kazusa.or.jp/lotus/
+	protein: Lj2.5_proteins.faa.gz				-- lotus_japonicus_pep
+	CDS: Lj2.5_cds.ffn.gz					-- lotus_japonicus_cds
+	Gene annotation: Lj2.5_gene_models.gff3
+	PrimaryProtein: 
+
+	* Real Dataset (after removing 511 tRNA from GFF)
+	gene: 37971
+	mRNA: 37971
+
+	* 1 genes can not pass overlap checking
+
+### maize
+	Download: http://www.phytozome.net/maize.php
+	protein: Zmays_181_protein.fa.gz 			-- maize_pep
+	CDS: Zmays_181_cds.fa.gz				-- maize_cds
+	Gene annotation: Zmays_181_gene.gff3.gz
+	PrimaryProtein: Zmays_181_protein_primaryTranscriptOnly.fa.gz -- maize_rep_pep
+
+	* Information
+	* Read data
+	Gene: 39656
+	PrimaryProtein: 39656
+	Transcript: 63540
+
+	* 1 genes can not pass overlap checking
+
+### medicago_truncatula
+	Download: http://www.phytozome.net/medicago.php
+	protein: Mtruncatula_198_protein.fa.gz			-- medicago_truncatula_pep
+	CDS: Mtruncatula_198_cds.fa.gz				-- medicago_truncatula_cds
+	Gene annotation: Mtruncatula_198_gene.gff3.gz
+	PrimaryProtein: Mtruncatula_198_protein_primaryTranscriptOnly.fa.gz -- medicago_truncatula_rep_pep
+
+	* Information
+	This release of Phytozome includes release Mt3.5v4 from the US/EU Medicago truncatula genome sequencing project with:
+	Genome Approximately 241Mb arranged in 8 chromosomes plus 16.6Mb of unmapped sequence. 
+	Loci 44,135 loci containing protein-coding transcripts 
+	Transcripts 45,888 protein-coding transcripts 
+
+	* 21 genes can not pass overlap checking
+
+### Millet (not finished can not download genome sequence)
+	Download: http://foxtailmillet.genomics.org.cn/page/species/download.jsp
+	protein: Millet.fa.glean.pep.gz				-- Millet_pep
+	CDS: Millet.fa.glean.cds.gz				-- Millet_cds
+	Gene annotation: Millet.fa.glean.pep.gz
+	PrimaryProtein: NA (Millet.fa.glean.pep.gz)		-- Millet_rep_pep
+
+	* Real Data
+	38801 mRNA, no gene label
+
+	* 0 genes can not pass overlap checking	
+
+### millet_JGI
+	Download: http://www.phytozome.net/foxtailmillet.php
+	protein: Sitalica_164_protein.fa.gz			-- millet_JGI_pep
+	CDS: Sitalica_164_cds.fa.gz				-- millet_JGI_cds
+	Gene annotation: Sitalica_164_gene.gff3.gz
+	PrimaryProtein: Sitalica_164_protein_primaryTranscriptOnly.fa.gz -- millet_JGI_rep_pep
+
+	* Information
+	This is the chromosome-scale release of the 8.3x whole genome shotgun assembly of Setaria italica. 
+	The first 9 scaffolds are pseudomolecules on which over 98.9% of the sequence data was able to be placed. 
+	Genome
+		The main genome assembly is approximately 405.7 Mb arranged in 336 scaffolds
+		Approximately 400.9 Mb are arranged in 6791 contigs (~ 1.2% gap)
+    		Scaffold N50 (L50) = 4 (47.3 Mb)
+    		Contig N50 (L50) = 982 (126.3 Kb)
+    		98.9% of the sequence data is represented in the 9 pseudomolecules
+	Loci	35,471 loci containing protein-coding transcripts
+	Transcripts	40,599 protein-coding transcripts 
+
+	* 579 genes can not pass overlap checking
+
+### Pabies (the scaffold number, do not have chrSize info, do not have synteny analysis)
+	Download: ftp://congenie.org/congenie/  http://congenie.org/
+	protein: Pabies1.0-high-confidence.pep.gz		-- Pabies_pep
+	CDS: Pabies1.0-high-confidence.cds.gz			-- Pabies_cds
+	Gene annotation: Pabies1.0-high-confidence.gff.gz	-- Pabies_rep_pep
+	PrimaryProtein: NA
+
+	* Real Data
+	CDS and Protein: 26597
+	CDS and Protein: 26009 after remove 588 sequences short 30AA
+			 These sequence may have enough length, but the ORF is wrong.
+
+	Gene: 28354 in High-Confidence.gff3
+	      1757 do not have sequecne (28354 - 1757 = 26597)
+
+	-----------------------------------------------------------------------------
+	* the chrID can not cover the ID in GFF files
+	
+### papaya
+	Download: http://www.phytozome.net/papaya.php
+	protein: Cpapaya_113_protein.fa.gz			-- papaya_pep
+	CDS: Cpapaya_113_cds.fa.gz				-- papaya_cds
+	Gene annotation: Cpapaya_113_gene.gff3.gz
+	PrimaryProtein: Cpapaya_113_protein_primaryTranscriptOnly.fa.gz -- papaya_rep_pep
+
+	* Information
+	Genome Approximately 135Mb arranged in 4114 contigs with at least one gene model 
+	Loci 27332 loci containing protein-coding transcripts 
+	Transcripts 27796 protein-coding transcripts 
+
+	* Real Data
+	gene: 27769
+	mRNA: 27793
+	Cpapaya_113_protein_primaryTranscriptOnly.fa: 27584
+
+	* 176 genes can not pass overlap checking
+
+### Peach Genome
+	Download: http://www.phytozome.net/peach.php
+	Protein: Ppersica_139_protein.fa.gz			-- peach_pep
+	CDS: Ppersica_139_cds.fa.gz				-- peach_cds
+	Gene Annotation: Ppersica_139_gene.gff3.gz
+	PrimaryProtein: Ppersica_139_protein_primaryTranscriptOnly.fa.gz -- peach_rep_pep
+	
+	* Information
+	This release of Phytozome includes the JGI v1.0 gene annotation of assembly v1.0
+	Genome Size Approximately 227.3 Mb arranged in 202 scaffolds
+   		    Approximately 224.6 Mb arranged in 2730 contigs (~ 1.2% gap)
+    		    Scaffold N50 (L50) = 4 (26.8 Mbp)
+    		    Contig N50 (L5) = 294 (214.2 Kbp)
+	Loci 27864 loci containing protein-coding genes
+	Transcripts 28702 protein-coding transcripts 
+	
+	* Real Dataset
+	Transcripts 28701
+
+	* 91 genes can not pass overlap checking
+	
+### Pear Genome
+	Download : peargenome.njau.edu.cn
+	User : yz357@cornell.edu  
+	Password : 2013119235252
+	Protein : pear.peptide.sequences.gz			-- pear_pep
+	CDS : pear.gene.cds.gz					-- pear_cds
+	Gene Annotation : pear.gene.gff.gz
+	PrimaryProtein: NA (pear.peptide.sequences.gz)
+
+	* Real Data
+	mRNA 42812, do not have gene label in GFF file
+
+	* 0 genes can not pass overlap checking
+
+### physcomitrella_patens
+	Download: http://www.phytozome.net/physcomitrella.php
+	protein: Ppatens_152_protein.fa.gz			-- physcomitrella_patens_pep
+	CDS: Ppatens_152_cds.fa.gz				-- physcomitrella_patens_cds
+	Gene annotation: Ppatens_152_gene.gff3.gz
+	PrimaryProtein: Ppatens_152_protein_primaryTranscriptOnly.fa.gz -- physcomitrella_patens_rep_pep
+
+	* Information v1.6
+	Genome Approximately 480Mb arranged in 27 chromosomes, assembled into 2106 scaffolds. 
+	Loci 32272 loci containing protein-coding transcripts 
+	Transcripts 38354 protein-coding transcripts 
+
+	* 62 genes can not pass overlap checking
+
+### pigeonpea
+	Download: http://www.icrisat.org/gt-bt/iipg/Genome_Manuscript.html
+	protein: Pigeonpea_gene.pep.gz				-- pigeonpea_pep
+	CDS: Pigeonpea_gene.cds.gz				-- pigeonpea_cds
+	Gene annotation: Pigeonpea_gene.gff.gz
+	PrimaryProtein: NA (Pigeonpea_gene.pep.gz) 		-- pigeonpea_rep_pep
+
+	* Information
+	we assembled into scaffolds representing 72.7% (605.78 Mb) of the 833.07 Mb pigeonpea genome. 
+	Genome analysis predicted 48,680 genes for pigeonpea
+
+	* Real Data
+	mRNA: 48680, do not have gene label
+
+	* 1 genes can not pass overlap checking
+
+### poplar
+	Download: http://www.phytozome.net/poplar.php
+	protein: Ptrichocarpa_210_protein.fa.gz			-- poplar_pep
+	CDS: Ptrichocarpa_210_cds.fa.gz				-- poplar_cds
+	Gene annotation: Ptrichocarpa_210_gene.gff3.gz
+	PrimaryProtein: Ptrichocarpa_210_protein_primaryTranscriptOnly.fa.gz -- poplar_rep_pep
+
+	* Information
+	This release of Phytozome includes the JGI v3.0 gene annotation of assembly v3.
+	Genome The main genome assembly is approximately 422.9 Mb arranged in 1,446 scaffolds
+	       Approximately 422.9 Mb arranged in 8,313 scaffolds (~2.585 gap)
+   	       181 scaffolds are > 50kb in size, representing approximately 97.3% of the genome
+	Loci 41,335 loci containing protein-coding transcripts
+	Transcripts 73,013 protein-coding transcripts 
+
+	* 365 genes can not pass overlap checking
+
+### potato
+	Download: http://www.phytozome.net/potato.php
+	protein: Stuberosum_206_protein.fa.gz			-- potato_pep
+	CDS: Stuberosum_206_cds.fa.gz				-- potato_cds
+	Gene annotation: Stuberosum_206_gene.gff3.gz		
+	PrimaryProtein: Stuberosum_206_protein_primaryTranscriptOnly.fa.gz -- potato_rep_pep
+
+	* Information
+	The gene annotation is Solanum tuberosum Group Phureja DM1-3 516R44 (CIP801092) Genome Annotation v3.4 
+	mapped to pseudomolecule sequence (PGSC_DM_v3_2.1.10_pseudomolecules.fa),
+	Genome ~800Mb arranged in 12 chromosomes 
+	Loci 35,119 loci containing protein-coding transcripts 
+	Transcripts 51,472 protein-coding transcripts 
+
+	* 436 genes can not pass overlap checking
+
+### prunus_mume ( do not have synteny analysis)
+	Download: not finished, the web site can not be reached
+	protein: 	-- prunus_mume_pep
+	CDS: 		-- prunus_mume_cds
+	Gene Annotation: NA
+	PrimaryProtein: NA
+
+	* Real Data
+	protein and mRNA 31390
+	using protein ID to generate trans_gene file
+
+### Rice genome:
+	Download: www.phytozome.net/rice.php
+	Protein: Osativa_204_protein.fa.gz	-- rice_pep
+	CDS: Osativa_204_cds.fa.gz		-- rice_cds
+	Gene annotation: Osativa_204_gene.gff3.gz
+	PrimaryProtein: Osativa_204_protein_primaryTranscriptOnly.fa.gz	-- rice_rep_pep
+
+	* Information
+	Genome 372Mb arranged in 12 chromosomes
+	Loci 39,049 loci containing protein-coding transcripts excluding TE genes
+	Transcripts 49,061 protein-coding transcripts
+
+	* 93 genes can not pass overlap checking
+	
+	* MSU with TE genes 
+	Loci 55,986
+	Transcripts 66,338
+
+### selaginella moellendorffii:
+	Download: www.phytozome.net/selaginella.php
+	protein: Smoellendorffii_91_protein.fa	-- selaginella_moellendorffii_pep
+	CDS: Smoellendorffii_91_cds.fa.gz	-- selaginella_moellendorffii_cds
+	Gene annotation: Smoellendorffii_91_gene.gff3.gz
+	PrimaryProtein: Smoellendorffii_91_protein_primaryTranscriptOnly.fa.gz -- selaginella_moellendorffii_rep_pep
+
+	* Information
+	This release of Phytozome includes the v1.0 Dec 20, 2007 FilteredModels3 annotation of Selaginella.
+	Genome Approximately 212.5Mb arranged in 27 chromosomes, assembled into 768 scaffolds. 
+	Loci 22273 loci containing protein-coding transcripts 
+	Gene 22285 do not combined in the same loci
+	Transcripts 22285 protein-coding transcripts
+
+	* 46 genes can not pass overlap checking	
+
+### sorghum:
+	Download: www.phytozome.net/sorghum_er.php
+	protein: Sbicolor_v2.1_255_protein.fa.gz -- sorghum_pep
+	CDS: Sbicolor_v2.1_255_cds.fa.gz 	 -- sorghum_cds
+	Gene annotation: Sbicolor_v2.1_255_gene.gff3.gz
+	PrimaryProtein: Sbicolor_v2.1_255_protein_primaryTranscriptOnly.fa.gz -- sorghum_rep_pep
+
+	* Information
+	Genome Size 726,616,606 base pairs arranged in 2n=20 chromosomes 
+	Loci 33,032 loci containing protein-coding transcripts 
+	Transcripts 39,441 protein-coding transcripts 
+
+	* 289 genes can not pass overlap checking
+
+### soybean
+	Download: www.phytozome.net/soybean.php
+	protein: Gmax_189_protein.fa.gz		-- soybean_pep
+	CDS: Gmax_189_cds.fa.gz			-- soybean_cds
+	Gene annotation: Gmax_189_gene.gff3.gz
+	PrimaryProtein: Gmax_189_protein_primaryTranscriptOnly.fa.gz -- soybean_rep_pep
+
+	* Information
+	Genome Size Approximately 975Mb is captured in 20 chromosomes, with a small additional amount of mostly repetitive sequence in unmapped scaffolds. 
+	Loci 54,175 protein-coding loci and 73,320 transcripts have been predicted 
+
+	* 698 genes can not pass overlap checking
+
+### strawberry
+	Download: www.phytozome.net/strawberry.php
+	protein: Fvesca_226_protein.fa.gz	-- strawberry_pep
+	CDS: Fvesca_226_cds.fa.gz		-- strawberry_cds
+	Gene annotation: Fvesca_226_gene.gff3.gz
+	PrimaryProtein: Fvesca_226_protein_primaryTranscriptOnly.fa.gz -- strawberry_rep_pep
+
+	* Information
+	This release of Phytozome includes gene annotation of "Fragaria vesca genome release 1.1.
+	Genome 240Mb arranged in 7 chromosomes 
+	Loci 32,831 loci containing protein-coding transcripts 
+	Transcripts 32,831 protein-coding transcripts 
+
+	* 47 genes can not pass overlap checking
+
+### sweet orange
+	Download: http://citrus.hzau.edu.cn/orange/download/data.php
+	protein: csi.peptide.fa.tar.gz		-- sweet_orange_pep
+	CDS: csi.CDS.fa.tar.gz			-- sweet_orange_cds
+	Gene annotation: csi.gene.models.gff3.tar.gz 
+	PrimaryProtein: NA (generate by convert_pid_selpri.pl) -- sweet_orange_rep_pep
+
+	* Real Data
+	Gene: 29655, 249 gene is not potein-coding
+	potein-coding transcript: 44275, but the corresponding gene is 29406;
+
+	* 5 genes can not pass overlap checking base on 29655
+
+	* Information, www.phytozome.net/citrus.php dataset do not published
+
+### TAIR10
+	Download: Tair
+	protein: TAIR10_pep_20101214_updated	-- TAIR10_pep
+	CDS: TAIR10_cds_20101214_updated	-- TAIR10_cds
+	Gene annotation: TAIR10_GFF3_genes.gff
+	PrimaryProtein: TAIR10_pep_20110103_representative_gene_model_updated -- TAIR10_rep_pep 
+
+	* Information
+	This release of Phytozome includes TAIR annotation release 10 of the Arabidopsis thaliana genome release 9.
+	Genome Approximately 135Mb arranged in 5 chromosomes 
+	Loci 27416 loci containing protein-coding transcripts 
+	Transcripts 35386 protein-coding transcripts 
+
+	* 275 genes can not pass overlap checking
+
+### thellugiella parvula
+	Download: http://thellungiella.org/blast/db/
+	protein: TpV84ORFs.protein		-- thellugiella_parvula_pep
+	CDS: TpV84ORFs.CDS			-- thellugiella_parvula_cds
+	Gene annotation: TpV84_ORFs.gff.gz
+	PrimaryProtein: TpV84ORFs.protein	-- thellugiella_parvula_rep_pep
+	
+	* Information
+	mRNA: 27132 in annotation, do not have gene label
+
+	* 1540 genes can not pass the overlap checking
+
+### tomato
+	Download: SGN
+	
+	* Information
+	Genome size: ~900Mb arranged in 12 chromosomes and an unanchored scaffold, SL2.40ch00 
+	Loci: 34727
+	gene: 34727 
+	Transcript: 34727 
+
+	* 383 genes can not pass overlap checking
+
+### volvox carteri
+	Download: http://www.phytozome.net/volvox.php
+	protein: Vcarteri_199_protein.fa.gz	-- volvox_carteri_pep
+	CDS: Vcarteri_199_cds.fa.gz 		-- volvox_carteri_cds
+	Gene annotation: Vcarteri_199_gene.gff3
+	PrimaryProtein: Vcarteri_199_protein_primaryTranscriptOnly.fa.gz -- volvox_carteri_rep_pep
+
+	* Information
+	Genome The main genome assembly is approximately 131.2 Mb arranged in 434 scaffolds
+	Loci 14,971 total loci containing protein-coding transcripts
+	Alternative Transcripts 314 total alternatively spliced transcripts 
+
+	* 83 genes can not pass overlap checking
+
+### watermelon
+	Download: icugi
+	protein: watermelon_v1.pep.gz		-- watermelon_pep
+	CDS: watermelon_v1.cds.gz		-- watermelon_cds
+	Gene annotation: watermelon_v1.gff.gz
+	PrimaryProtein: watermelon_v1.pep.gz	-- watermelon_rep_pep
+
+	* Information
+	The assembled N90 scaffold sizes were 374,692 bps. 
+	Using the genetic map, we anchored 93.5% of the assembled sequence onto the eleven pseudochromosomes. 
+	Genes 23,440
+	Transcripts 23,440
+
+	* 2 genes can not pass overlap checking  
