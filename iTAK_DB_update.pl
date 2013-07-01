@@ -713,6 +713,9 @@ sub cluster
 			}
 		}
 	}
+
+	my $dnd_file = $protein_seq; $dnd_file =~ s/\.pep/\.dnd/;
+	if (-s $dnd_file) { unlink($dnd_file); }
 }
 
 =head1
